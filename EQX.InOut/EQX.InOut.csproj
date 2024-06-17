@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ByVendor\Ajinextek\" />
+    <ProjectReference Include="..\..\EQX.Core\EQX.Core\EQX.Core.csproj" />
   </ItemGroup>
 
 </Project>
