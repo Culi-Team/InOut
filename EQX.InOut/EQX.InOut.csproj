@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\EQX.Core\EQX.Core\EQX.Core.csproj" />
   </ItemGroup>
 

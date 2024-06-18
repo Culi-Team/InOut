@@ -5,7 +5,7 @@ namespace EQX.InOut
     public class InputDeviceBase : IDInputDevice
     {
         #region Properties
-        public List<DInput> Inputs { get; }
+        public List<IDInput> Inputs { get; }
         public int Id { get; init; }
         public string Name { get; init; }
         public virtual bool IsConnected { get; }
@@ -19,7 +19,7 @@ namespace EQX.InOut
             Name = name;
             _inputs = inputs;
 
-            Inputs = new List<DInput>();
+            Inputs = new List<IDInput>();
             for (int i = 0; i< _inputs.Count; i++)
             {
                 Inputs.Add(new DInput(i, _inputs[i], this));
