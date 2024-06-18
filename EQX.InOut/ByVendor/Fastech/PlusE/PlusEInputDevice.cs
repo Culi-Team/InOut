@@ -1,8 +1,8 @@
 ﻿using EQX.Motion.ThirdParty.Fastech.PlusE;
+using System.Threading;
 
 namespace EQX.InOut
 {
-
     public class PlusEInputDevice : InputDeviceBase
     {
         public override bool IsConnected => CAXL.AxlIsOpened() == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS;
