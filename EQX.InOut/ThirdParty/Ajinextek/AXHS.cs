@@ -621,7 +621,7 @@ public enum AXT_MOTION_DETECT_DOWN_START_POINT:uint
 
 public enum AXT_MOTION_PULSE_OUTPUT:uint
 {
-    OneHighLowHighm,                       // 1 pulse method, PULSE(Active High), forward direction(DIR=Low)  / reverse direction(DIR=High)
+    OneHighLowHigh,                       // 1 pulse method, PULSE(Active High), forward direction(DIR=Low)  / reverse direction(DIR=High)
     OneHighHighLow,                        // 1 pulse method, PULSE(Active High), forward direction (DIR=High) / reverse direction (DIR=Low)
     OneLowLowHigh,                         // 1 pulse method, PULSE(Active Low), forward direction (DIR=Low)  / reverse direction (DIR=High)
     OneLowHighLow,                         // 1 pulse method, PULSE(Active Low), forward direction (DIR=High) / reverse direction (DIR=Low)
