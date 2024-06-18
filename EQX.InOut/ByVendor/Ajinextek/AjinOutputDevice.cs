@@ -1,14 +1,15 @@
-﻿using EQX.Motion.ThirdParty.Fastech.PlusE;
+﻿using EQX.Core.InOut;
 
 namespace EQX.InOut
 {
-
-    public class PlusEInputDevice : InputDeviceBase
+    public class AjinOutputDevice : OutputDeviceBase
     {
+        #region Properties
         public override bool IsConnected => CAXL.AxlIsOpened() == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS;
+        #endregion
 
         #region Constructor(s)
-        public PlusEInputDevice(int id, string name, List<string> inputs)
+        public AjinOutputDevice(int id, string name, List<string> inputs)
             : base(id, name, inputs)
         {
         }
@@ -33,8 +34,15 @@ namespace EQX.InOut
         #endregion
 
         #region Private methods
-        protected override bool GetInput(int index)
+        protected override bool SetOutput(int index, bool value)
         {
+            return CAXD.AxdoWriteOutport(index, value ? 1u : 0u) == (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS;
+        }
+
+        protected override bool GetOutput(int index)
+        {
+            CAXD.AxdoReadOutport(index, ref oldValue);
+
             return oldValue == 1;
         }
         #endregion
