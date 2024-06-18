@@ -5,15 +5,11 @@ namespace EQX.InOut
     public class SimulationInputDevice : InputDeviceBase
     {
         MemoryMappedFile mmf;
-        Mutex mutex;
 
         public SimulationInputDevice(int id, string name, List<string> inputs)
             : base(id, name, inputs)
         {
             mmf = MemoryMappedFile.CreateNew("SimInputData", 256);
-
-            bool mutexCreated;
-            mutex = new Mutex(true, "siminputmapmutex", out mutexCreated);
         }
 
         ~SimulationInputDevice()

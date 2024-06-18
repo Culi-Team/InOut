@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQX.InOut", "EQX.InOut\EQX.InOut.csproj", "{BF180FF5-AE65-4E63-AD92-2BBF3A6B5455}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationInputWindow", "SimulationInputWindow\SimulationInputWindow.csproj", "{E42A22E3-2E60-49B8-9C53-A6E92E7E109C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimulationInputWindow", "SimulationInputWindow\SimulationInputWindow.csproj", "{E42A22E3-2E60-49B8-9C53-A6E92E7E109C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EQX.Core", "..\..\..\1. Source\WpfTemplateDotNet1\EQX.Core\EQX.Core\EQX.Core.csproj", "{FF4288F1-93BB-4C80-97C6-752D529B1910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E42A22E3-2E60-49B8-9C53-A6E92E7E109C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E42A22E3-2E60-49B8-9C53-A6E92E7E109C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E42A22E3-2E60-49B8-9C53-A6E92E7E109C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF4288F1-93BB-4C80-97C6-752D529B1910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF4288F1-93BB-4C80-97C6-752D529B1910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF4288F1-93BB-4C80-97C6-752D529B1910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF4288F1-93BB-4C80-97C6-752D529B1910}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
