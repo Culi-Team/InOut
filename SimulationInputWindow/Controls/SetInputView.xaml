@@ -21,7 +21,8 @@
         </Ellipse>
         <TextBlock Grid.Column="1"
                    VerticalAlignment="Center"
-                   Text="{Binding Id}"/>
+                   HorizontalAlignment="Center"
+                   Text="{Binding Id,StringFormat={}[{0}]}"/>
         <Button Content="{Binding Name}"
                 Command="{Binding SetValueCommand}"
                 Grid.Column="2"/>
