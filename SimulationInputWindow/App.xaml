@@ -2,8 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SimulationInputWindow"
+             xmlns:cvt="clr-namespace:SimulationInputWindow.Converters"
+             xmlns:controls="clr-namespace:SimulationInputWindow.Controls"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <cvt:BooleanToFillOnOffConverter x:Key="BooleanToFillOnOffConverter"/>
+            
+            <DataTemplate DataType="{x:Type controls:SetInputViewModel}">
+                <controls:SetInputView/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
