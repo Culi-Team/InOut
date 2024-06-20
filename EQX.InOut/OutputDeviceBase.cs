@@ -5,7 +5,7 @@ namespace EQX.InOut
     public class OutputDeviceBase : IDOutputDevice
     {
         #region Properties
-        public List<DOutput> Outputs { get; }
+        public List<IDOutput> Outputs { get; }
         public int Id { get; init; }
         public string Name { get; init; }
         public virtual bool IsConnected { get; }
@@ -23,7 +23,7 @@ namespace EQX.InOut
             Name = name;
             _outputs = outputs;
 
-            Outputs = new List<DOutput>();
+            Outputs = new List<IDOutput>();
             for (int i = 0; i < _outputs.Count; i++)
             {
                 Outputs.Add(new DOutput(i, _outputs[i], this));
