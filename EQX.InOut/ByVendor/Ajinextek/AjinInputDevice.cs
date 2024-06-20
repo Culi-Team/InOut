@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace EQX.InOut
 {
-    public class AjinInputDevice : InputDeviceBase
+    public class AjinInputDevice<TEnum> : InputDeviceBase<TEnum>
     {
         #region Properties
         public override bool IsConnected => CAXL.AxlIsOpened() == 0x01;
         #endregion
 
         #region Constructor(s)
-        public AjinInputDevice(int id, string name, List<string> inputs, List<int> indexes)
-            : base(id, name, inputs, indexes)
+        public AjinInputDevice(int id, string name)
+            : base(id, name)
         {
         }
         #endregion

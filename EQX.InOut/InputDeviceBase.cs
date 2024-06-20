@@ -2,7 +2,7 @@
 
 namespace EQX.InOut
 {
-    public class InputDeviceBase : IDInputDevice
+    public class InputDeviceBase<TEnum> : IDInputDevice
     {
         #region Properties
         public List<IDInput> Inputs { get; }
@@ -13,16 +13,18 @@ namespace EQX.InOut
         #endregion
 
         #region Constructor(s)
-        public InputDeviceBase(int id, string name, List<string> inputs, List<int> indexes)
+        public InputDeviceBase(int id, string name)
         {
             Id = id;
             Name = name;
-            _inputs = inputs;
+
+            var inputList = Enum.GetNames(typeof(TEnum)).ToList();
+            var inputIndex = (int[])Enum.GetValues(typeof(TEnum));
 
             Inputs = new List<IDInput>();
-            for (int i = 0; i< _inputs.Count; i++)
+            for (int i = 0; i< inputList.Count; i++)
             {
-                Inputs.Add(new DInput(indexes[i], _inputs[i], this));
+                Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
             }
         }
         #endregion
@@ -45,7 +47,6 @@ namespace EQX.InOut
         }
 
         #region Privates
-        private readonly List<string> _inputs;
         #endregion
     }
 }

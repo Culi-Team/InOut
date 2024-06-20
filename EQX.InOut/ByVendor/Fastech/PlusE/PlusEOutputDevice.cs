@@ -2,10 +2,10 @@
 
 namespace EQX.InOut
 {
-    public class PlusEOutputDevice : OutputDeviceBase
+    public class PlusEOutputDevice<TEnum> : OutputDeviceBase<TEnum>
     {
-        public PlusEOutputDevice(int id, string name, List<string> outputs, List<int> indexes)
-            : base(id, name, outputs, indexes)
+        public PlusEOutputDevice(int id, string name)
+            : base(id, name)
         {
             nativeLib = new EziPlusEDIOLib(id, name);
         }

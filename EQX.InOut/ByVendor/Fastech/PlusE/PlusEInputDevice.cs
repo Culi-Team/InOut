@@ -3,11 +3,11 @@ using System.Threading;
 
 namespace EQX.InOut
 {
-    public class PlusEInputDevice : InputDeviceBase
+    public class PlusEInputDevice<TEnum> : InputDeviceBase<TEnum>
     {
         #region Constructor(s)
-        public PlusEInputDevice(int id, string name, List<string> inputs, List<int> indexes)
-            : base(id, name, inputs, indexes)
+        public PlusEInputDevice(int id, string name)
+            : base(id, name)
         {
             nativeLib = new EziPlusEDIOLib(id, name);
         }

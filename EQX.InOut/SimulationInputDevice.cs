@@ -2,12 +2,12 @@
 
 namespace EQX.InOut
 {
-    public class SimulationInputDevice : InputDeviceBase
+    public class SimulationInputDevice<TEnum> : InputDeviceBase<TEnum>
     {
         MemoryMappedFile mmf;
 
-        public SimulationInputDevice(int id, string name, List<string> inputs, List<int> indexes)
-            : base(id, name, inputs, indexes)
+        public SimulationInputDevice(int id, string name)
+            : base(id, name)
         {
             mmf = MemoryMappedFile.CreateNew("SimInputData", 256);
         }
@@ -29,28 +29,5 @@ namespace EQX.InOut
 
             return values[index] == 1;
         }
-    }
-
-    public class SimulationOutputDevice : OutputDeviceBase
-    {
-        public SimulationOutputDevice(int id, string name, List<string> inputs, List<int> indexes)
-            : base(id, name, inputs, indexes)
-        {
-            _outputs = new bool[256];
-        }
-
-        protected override bool GetOutput(int index)
-        {
-            return _outputs[index];
-        }
-
-        protected override bool SetOutput(int index, bool value)
-        {
-            _outputs[index] = value;
-
-            return true;
-        }
-
-        private readonly bool[] _outputs;
     }
 }

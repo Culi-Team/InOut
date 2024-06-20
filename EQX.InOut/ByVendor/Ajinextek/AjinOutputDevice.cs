@@ -2,15 +2,15 @@
 
 namespace EQX.InOut
 {
-    public class AjinOutputDevice : OutputDeviceBase
+    public class AjinOutputDevice<TEnum> : OutputDeviceBase<TEnum>
     {
         #region Properties
         public override bool IsConnected => CAXL.AxlIsOpened() == 0x01;
         #endregion
 
         #region Constructor(s)
-        public AjinOutputDevice(int id, string name, List<string> inputs, List<int> indexes)
-            : base(id, name, inputs, indexes)
+        public AjinOutputDevice(int id, string name)
+            : base(id, name)
         {
         }
         #endregion
