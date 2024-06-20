@@ -21,7 +21,7 @@ namespace SimulationInputWindow
         {
             InputList = new ObservableCollection<SetInputViewModel>();
             _memoryMapFile = MemoryMappedFile.OpenExisting("SimInputData");
-            LoadInputFromFile("InputDefine.txt");
+            LoadInput();
         }
 
         private void SetValue(object sender, EventArgs e) 
@@ -43,23 +43,21 @@ namespace SimulationInputWindow
             }
         }
 
-        private void LoadInputFromFile(string filePath)
+        public enum EInput
         {
-            string inputNames = File.ReadAllText(filePath);
-            string[] inputNamesArray = inputNames.Split(",\r\n");
+            START_SW,
+            STOP_SW,
+        }
 
-            for(int i =0;i<inputNamesArray.Length;i++) 
+        private void LoadInput()
+        {
+            var inputList = Enum.GetNames(typeof(EInput)).ToList();
+            var inputValues = (EInput[])Enum.GetValues(typeof(EInput));
+
+            for (int i = 0; i < inputList.Count; i++)
             {
-                inputNamesArray[i] = inputNamesArray[i].Remove(0,1);
-                inputNamesArray[i] = inputNamesArray[i].Remove(inputNamesArray[i].Length-1, 1);
-            }
-
-            for (int i = 0; i < 256; i++)
-            {
-                if (i >= inputNamesArray.Length -1) break;
-
-                SetInputViewModel inputNew = new SetInputViewModel(i);
-                inputNew.Name = inputNamesArray[i];
+                SetInputViewModel inputNew = new SetInputViewModel((int)inputValues[i]);
+                inputNew.Name = inputList[i];
                 inputNew.SetValueEvent += SetValue;
 
                 InputList.Add(inputNew);
