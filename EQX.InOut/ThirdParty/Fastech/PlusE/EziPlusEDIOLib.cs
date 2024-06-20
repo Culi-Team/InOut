@@ -65,9 +65,15 @@ namespace EQX.Motion.ThirdParty.Fastech.PlusE
                 tcpClient = new Socket(SocketType.Stream, ProtocolType.Tcp);
             }
 
-            tcpClient.Connect(iPAddress, 2002);
-
-            return tcpClient.Connected;
+            try
+            {
+                tcpClient.Connect(iPAddress, 2002);
+                return tcpClient.Connected;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Disconnect()
