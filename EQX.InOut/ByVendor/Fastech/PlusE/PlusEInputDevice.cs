@@ -5,7 +5,7 @@ namespace EQX.InOut
 {
     public class PlusEInputDevice : InputDeviceBase
     {
-        public override bool IsConnected => CAXL.AxlIsOpened() == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS;
+        public override bool IsConnected { get; }
 
         #region Constructor(s)
         public PlusEInputDevice(int id, string name, List<string> inputs)

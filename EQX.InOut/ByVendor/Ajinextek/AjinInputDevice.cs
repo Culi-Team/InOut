@@ -10,7 +10,7 @@ namespace EQX.InOut
     public class AjinInputDevice : InputDeviceBase
     {
         #region Properties
-        public override bool IsConnected => CAXL.AxlIsOpened() == (int)AXT_FUNC_RESULT.AXT_RT_SUCCESS;
+        public override bool IsConnected => CAXL.AxlIsOpened() == 0x01;
         #endregion
 
         #region Constructor(s)
