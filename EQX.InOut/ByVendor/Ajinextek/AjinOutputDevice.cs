@@ -9,8 +9,8 @@ namespace EQX.InOut
         #endregion
 
         #region Constructor(s)
-        public AjinOutputDevice(int id, string name, List<string> inputs)
-            : base(id, name, inputs)
+        public AjinOutputDevice(int id, string name, List<string> inputs, List<int> indexes)
+            : base(id, name, inputs, indexes)
         {
         }
         #endregion

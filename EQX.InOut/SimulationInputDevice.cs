@@ -6,8 +6,8 @@ namespace EQX.InOut
     {
         MemoryMappedFile mmf;
 
-        public SimulationInputDevice(int id, string name, List<string> inputs)
-            : base(id, name, inputs)
+        public SimulationInputDevice(int id, string name, List<string> inputs, List<int> indexes)
+            : base(id, name, inputs, indexes)
         {
             mmf = MemoryMappedFile.CreateNew("SimInputData", 256);
         }
@@ -33,8 +33,8 @@ namespace EQX.InOut
 
     public class SimulationOutputDevice : OutputDeviceBase
     {
-        public SimulationOutputDevice(int id, string name, List<string> inputs)
-            : base(id, name, inputs)
+        public SimulationOutputDevice(int id, string name, List<string> inputs, List<int> indexes)
+            : base(id, name, inputs, indexes)
         {
             _outputs = new bool[256];
         }

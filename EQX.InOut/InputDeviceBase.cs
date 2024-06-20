@@ -8,12 +8,12 @@ namespace EQX.InOut
         public List<IDInput> Inputs { get; }
         public int Id { get; init; }
         public string Name { get; init; }
-        public virtual bool IsConnected { get; }
+        public virtual bool IsConnected { get; protected set; }
         public bool this[int index] => GetInput(index);
         #endregion
 
         #region Constructor(s)
-        public InputDeviceBase(int id, string name, List<string> inputs)
+        public InputDeviceBase(int id, string name, List<string> inputs, List<int> indexes)
         {
             Id = id;
             Name = name;
@@ -22,7 +22,7 @@ namespace EQX.InOut
             Inputs = new List<IDInput>();
             for (int i = 0; i< _inputs.Count; i++)
             {
-                Inputs.Add(new DInput(i, _inputs[i], this));
+                Inputs.Add(new DInput(indexes[i], _inputs[i], this));
             }
         }
         #endregion

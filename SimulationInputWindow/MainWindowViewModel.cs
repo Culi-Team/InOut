@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SimulationInputWindow
 {
-    public class MainWindowViewModel 
+    public partial class MainWindowViewModel 
     {
         public ObservableCollection<SetInputViewModel> InputList { get; set; }
 
@@ -41,12 +41,6 @@ namespace SimulationInputWindow
 
                 }
             }
-        }
-
-        public enum EInput
-        {
-            START_SW,
-            STOP_SW,
         }
 
         private void LoadInput()

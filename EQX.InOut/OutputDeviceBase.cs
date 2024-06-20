@@ -8,7 +8,7 @@ namespace EQX.InOut
         public List<IDOutput> Outputs { get; }
         public int Id { get; init; }
         public string Name { get; init; }
-        public virtual bool IsConnected { get; }
+        public virtual bool IsConnected { get; protected set; }
         public bool this[int index]
         {
             get => GetOutput(index);
@@ -17,7 +17,7 @@ namespace EQX.InOut
         #endregion
 
         #region Constructor(s)
-        public OutputDeviceBase(int id, string name, List<string> outputs)
+        public OutputDeviceBase(int id, string name, List<string> outputs, List<int> indexes)
         {
             Id = id;
             Name = name;
@@ -26,7 +26,7 @@ namespace EQX.InOut
             Outputs = new List<IDOutput>();
             for (int i = 0; i < _outputs.Count; i++)
             {
-                Outputs.Add(new DOutput(i, _outputs[i], this));
+                Outputs.Add(new DOutput(indexes[i], _outputs[i], this));
             }
         }
         #endregion
