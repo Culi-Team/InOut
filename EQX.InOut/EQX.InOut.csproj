@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\EQX.Core\EQX.Core\EQX.Core.csproj" />
+    <ProjectReference Include="..\..\EQX.ThirdParty\EQX.ThirdParty\EQX.ThirdParty.csproj" />
   </ItemGroup>
 
 </Project>

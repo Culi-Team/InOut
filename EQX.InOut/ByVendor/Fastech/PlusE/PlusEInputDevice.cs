@@ -1,4 +1,4 @@
-﻿using EQX.Motion.ThirdParty.Fastech.PlusE;
+﻿using EQX.ThirdParty.Fastech;
 using System.Threading;
 
 namespace EQX.InOut

@@ -10,7 +10,7 @@ namespace EQX.InOut
     public class AjinInputDevice<TEnum> : InputDeviceBase<TEnum>
     {
         #region Properties
-        public override bool IsConnected => CAXL.AxlIsOpened() == 0x01;
+        public override bool IsConnected => AXL.AxlIsOpened() == 0x01;
         #endregion
 
         #region Constructor(s)
@@ -25,14 +25,14 @@ namespace EQX.InOut
         {
             if (IsConnected) return true;
 
-            if (CAXL.AxlOpen(7) != (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS) return false;
+            if (AXL.AxlOpen(7) != (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS) return false;
 
             return true;
         }
 
         public override bool Disconnect()
         {
-            CAXL.AxlClose();
+            AXL.AxlClose();
 
             return true;
         }
