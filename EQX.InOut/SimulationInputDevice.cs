@@ -9,7 +9,7 @@ namespace EQX.InOut
         public SimulationInputDevice(int id, string name)
             : base(id, name)
         {
-            mmf = MemoryMappedFile.CreateNew("SimInputData", 256);
+            mmf = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
         }
 
         ~SimulationInputDevice()
