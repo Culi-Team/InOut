@@ -1,6 +1,4 @@
-﻿using EQX.Core.InOut;
-
-namespace EQX.InOut
+﻿namespace EQX.InOut
 {
     public class AjinOutputDevice<TEnum> : OutputDeviceBase<TEnum>
     {
