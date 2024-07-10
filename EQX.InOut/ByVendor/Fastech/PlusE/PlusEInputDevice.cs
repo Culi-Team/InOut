@@ -2,7 +2,7 @@
 
 namespace EQX.InOut
 {
-    public class PlusEInputDevice<TEnum> : InputDeviceBase<TEnum>
+    public class PlusEInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         #region Constructor(s)
         public PlusEInputDevice(int id, string name)

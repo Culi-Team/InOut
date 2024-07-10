@@ -2,7 +2,7 @@
 
 namespace EQX.InOut
 {
-    public class InputDeviceBase<TEnum> : IDInputDevice
+    public class InputDeviceBase<TEnum> : IDInputDevice where TEnum : Enum
     {
         #region Properties
         public List<IDInput> Inputs { get; }

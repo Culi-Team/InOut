@@ -1,6 +1,6 @@
 ﻿namespace EQX.InOut
 {
-    public class AjinInputDevice<TEnum> : InputDeviceBase<TEnum>
+    public class AjinInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         #region Properties
         public override bool IsConnected => AXL.AxlIsOpened() == 0x01;

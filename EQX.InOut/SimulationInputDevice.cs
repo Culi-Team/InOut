@@ -2,7 +2,7 @@
 
 namespace EQX.InOut
 {
-    public class SimulationInputDevice<TEnum> : InputDeviceBase<TEnum>
+    public class SimulationInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         MemoryMappedFile mmf;
 
