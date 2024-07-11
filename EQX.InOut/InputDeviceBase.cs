@@ -13,7 +13,7 @@ namespace EQX.InOut
         #endregion
 
         #region Constructor(s)
-        public InputDeviceBase(int id, string name)
+        public InputDeviceBase(int id, string name, int offset = 0, int count = -1)
         {
             Id = id;
             Name = name;
@@ -21,8 +21,11 @@ namespace EQX.InOut
             var inputList = Enum.GetNames(typeof(TEnum)).ToList();
             var inputIndex = (int[])Enum.GetValues(typeof(TEnum));
 
+            if (count == -1) count = inputList.Count;
+            if (offset + count > inputList.Count) throw new ArgumentOutOfRangeException();
+
             Inputs = new List<IDInput>();
-            for (int i = 0; i< inputList.Count; i++)
+            for (int i = offset; i < offset + count; i++)
             {
                 Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
             }
