@@ -1,4 +1,5 @@
 ﻿using EQX.Core.InOut;
+using EQX.InOut;
 
 namespace EQX.InOut
 {
@@ -17,7 +18,7 @@ namespace EQX.InOut
         #endregion
 
         #region Constructor(s)
-        public OutputDeviceBase(int id, string name)
+        public OutputDeviceBase(int id, string name, int offset = 0, int count = -1)
         {
             Id = id;
             Name = name;
@@ -25,8 +26,10 @@ namespace EQX.InOut
             var outputList = Enum.GetNames(typeof(TEnum)).ToList();
             var outputIndex = (int[])Enum.GetValues(typeof(TEnum));
 
+            if (count == -1) count = outputList.Count;
+
             Outputs = new List<IDOutput>();
-            for (int i = 0; i < outputList.Count; i++)
+            for (int i = offset; i < offset + count; i++)
             {
                 Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
             }

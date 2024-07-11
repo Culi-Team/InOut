@@ -2,8 +2,8 @@
 {
     public class SimulationOutputDevice<TEnum> : OutputDeviceBase<TEnum>
     {
-        public SimulationOutputDevice(int id, string name)
-            : base(id, name)
+        public SimulationOutputDevice(int id, string name, int offset = 0, int count = -1)
+            : base(id, name, offset, count)
         {
             _outputs = new bool[256];
         }

@@ -7,8 +7,8 @@
         #endregion
 
         #region Constructor(s)
-        public AjinOutputDevice(int id, string name)
-            : base(id, name)
+        public AjinOutputDevice(int id, string name, int offset = 0, int count = -1)
+            : base(id, name, offset, count)
         {
         }
         #endregion
