@@ -21,12 +21,12 @@ namespace EQX.InOut
                 else if (_inBackward != null)
                 {
                     // Only backward is not null
-                    return _inForward!.Value;
+                    return !_inBackward!.Value;
                 }
                 else
                 {
                     // Only forward is not null
-                    return !_inBackward!.Value;
+                    return _inForward!.Value;
                 }
             }
         }
@@ -48,12 +48,12 @@ namespace EQX.InOut
                 else if (_inBackward != null)
                 {
                     // Only backward is not null
-                    return !_inForward!.Value;
+                    return _inBackward!.Value;
                 }
                 else
                 {
                     // Only forward is not null
-                    return _inBackward!.Value;
+                    return !_inForward!.Value;
                 }
             }
         }
@@ -65,8 +65,8 @@ namespace EQX.InOut
             _outForward = outForward;
             _outBackward = outBackward;
         }
-
-        public void MoveForward()
+        
+        public void Forward()
         {
             if (_outForward != null & _outBackward != null)
             {
@@ -91,7 +91,7 @@ namespace EQX.InOut
             }
         }
 
-        public void MoveBackward()
+        public void Backward()
         {
             if (_outForward != null & _outBackward != null)
             {
