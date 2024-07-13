@@ -5,8 +5,8 @@ namespace EQX.InOut
     public class PlusEInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         #region Constructor(s)
-        public PlusEInputDevice(int id, string name, int offset = 0, int count = -1)
-            : base(id, name, offset, count)
+        public PlusEInputDevice(int id, string name, int maxPin, int offset = 0)
+            : base(id, name, maxPin, offset)
         {
             nativeLib = new EziPlusEDIOLib(id, name);
         }

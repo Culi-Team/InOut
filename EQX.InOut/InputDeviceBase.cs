@@ -9,25 +9,26 @@ namespace EQX.InOut
         public int Id { get; init; }
         public string Name { get; init; }
         public virtual bool IsConnected { get; protected set; }
-        public bool this[int index] => GetInput(index);
+        public bool this[int index] => GetInput(index % _maxPin);
         #endregion
 
         #region Constructor(s)
-        public InputDeviceBase(int id, string name, int offset = 0, int count = -1)
+        public InputDeviceBase(int id, string name, int maxPin, int offset = 0)
         {
             Id = id;
             Name = name;
 
+            _maxPin = maxPin;
+
             var inputList = Enum.GetNames(typeof(TEnum)).ToList();
             var inputIndex = (int[])Enum.GetValues(typeof(TEnum));
 
-            if (count == -1) count = inputList.Count;
-            if (offset + count > inputList.Count) throw new ArgumentOutOfRangeException();
+            if (offset + maxPin > inputList.Count) throw new ArgumentOutOfRangeException();
 
             Inputs = new List<IDInput>();
-            for (int i = offset; i < offset + count; i++)
+            for (int i = offset; i < offset + maxPin; i++)
             {
-                Inputs.Add(new DInput(inputIndex[i] % count, inputList[i], this));
+                Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
             }
         }
         #endregion
@@ -50,6 +51,7 @@ namespace EQX.InOut
         }
 
         #region Privates
+        private int _maxPin;
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO.MemoryMappedFiles;
+using System.Reflection;
 
 namespace EQX.InOut
 {
@@ -6,10 +7,12 @@ namespace EQX.InOut
     {
         MemoryMappedFile mmf;
 
-        public SimulationInputDevice(int id, string name, int offset = 0, int count = -1)
-            : base(id, name, offset, count)
+        public SimulationInputDevice(int id, string name, int maxPin, int offset = 0)
+            : base(id, name, maxPin, offset)
         {
-            mmf = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
+            _offset = offset;
+
+            mmf = MemoryMappedFile.CreateOrOpen($"SimInputData", 256);
         }
 
         ~SimulationInputDevice()
@@ -27,7 +30,19 @@ namespace EQX.InOut
                 values = reader.ReadBytes(256);
             }
 
-            return values[index] == 1;
+            return values[_offset + index] == 1;
         }
+
+        public void SetInput(int index, bool value)
+        {
+            using (MemoryMappedViewStream stream = mmf.CreateViewStream(index, 0))
+            {
+                BinaryWriter writer = new BinaryWriter(stream);
+
+                writer.Write(value ? '1' : '0');
+            }
+        }
+
+        private int _offset;
     }
 }

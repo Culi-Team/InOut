@@ -12,26 +12,26 @@ namespace EQX.InOut
         public virtual bool IsConnected { get; protected set; }
         public bool this[int index]
         {
-            get => GetOutput(index);
-            set => SetOutput(index, value);
+            get => GetOutput(index % _maxPin);
+            set => SetOutput(index % _maxPin, value);
         }
         #endregion
 
         #region Constructor(s)
-        public OutputDeviceBase(int id, string name, int offset = 0, int count = -1)
+        public OutputDeviceBase(int id, string name, int maxPin, int offset = 0)
         {
             Id = id;
             Name = name;
 
+            _maxPin = maxPin;
+
             var outputList = Enum.GetNames(typeof(TEnum)).ToList();
             var outputIndex = (int[])Enum.GetValues(typeof(TEnum));
 
-            if (count == -1) count = outputList.Count;
-
             Outputs = new List<IDOutput>();
-            for (int i = offset; i < offset + count; i++)
+            for (int i = offset; i < offset + maxPin; i++)
             {
-                Outputs.Add(new DOutput(outputIndex[i] % count, outputList[i], this));
+                Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
             }
         }
         #endregion
@@ -59,6 +59,7 @@ namespace EQX.InOut
         }
 
         #region Privates
+        private int _maxPin;
         #endregion
     }
 }
