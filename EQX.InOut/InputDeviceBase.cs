@@ -27,7 +27,7 @@ namespace EQX.InOut
             Inputs = new List<IDInput>();
             for (int i = offset; i < offset + count; i++)
             {
-                Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
+                Inputs.Add(new DInput(inputIndex[i] % count, inputList[i], this));
             }
         }
         #endregion

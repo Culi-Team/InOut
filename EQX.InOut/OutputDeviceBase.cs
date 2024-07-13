@@ -31,7 +31,7 @@ namespace EQX.InOut
             Outputs = new List<IDOutput>();
             for (int i = offset; i < offset + count; i++)
             {
-                Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
+                Outputs.Add(new DOutput(outputIndex[i] % count, outputList[i], this));
             }
         }
         #endregion
