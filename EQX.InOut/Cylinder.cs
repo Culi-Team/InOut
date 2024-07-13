@@ -117,10 +117,10 @@ namespace EQX.InOut
         }
 
         #region Privates
-        private readonly IDOutput? _outForward;
-        private readonly IDOutput? _outBackward;
-        private readonly IDInput? _inForward;
-        private readonly IDInput? _inBackward;
+        private IDOutput? _outForward { get; }
+        private IDOutput? _outBackward { get; }
+        private IDInput? _inForward { get; }
+        private IDInput? _inBackward { get; }
         #endregion
     }
 }

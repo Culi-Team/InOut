@@ -1,5 +1,6 @@
 ﻿using EQX.Core.InOut;
 using System.IO.MemoryMappedFiles;
+using System.Reflection;
 
 namespace EQX.InOut
 {
@@ -160,10 +161,10 @@ namespace EQX.InOut
         #region Privates
         MemoryMappedFile _mmf;
 
-        private readonly IDOutput? _outForward;
-        private readonly IDOutput? _outBackward;
-        private readonly IDInput? _inForward;
-        private readonly IDInput? _inBackward;
+        private IDOutput? _outForward { get; }
+        private IDOutput? _outBackward { get; }
+        private IDInput? _inForward { get; }
+        private IDInput? _inBackward { get; }
         #endregion
     }
 }

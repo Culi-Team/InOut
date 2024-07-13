@@ -12,7 +12,7 @@ namespace EQX.InOut
         {
             _offset = offset;
 
-            mmf = MemoryMappedFile.CreateOrOpen($"SimInputData", 256);
+            mmf = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
         }
 
         ~SimulationInputDevice()
@@ -35,11 +35,17 @@ namespace EQX.InOut
 
         public void SetInput(int index, bool value)
         {
-            using (MemoryMappedViewStream stream = mmf.CreateViewStream(index, 0))
+            using (MemoryMappedViewStream stream = mmf.CreateViewStream(_offset + index, 0))
             {
                 BinaryWriter writer = new BinaryWriter(stream);
-
-                writer.Write(value ? '1' : '0');
+                if (value)
+                {
+                    writer.Write((char)1);
+                }
+                else
+                {
+                    writer.Write((char)0);
+                }
             }
         }
 
