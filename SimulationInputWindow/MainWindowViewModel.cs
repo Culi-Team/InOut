@@ -6,32 +6,58 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SimulationInputWindow
 {
-    public partial class MainWindowViewModel 
+    public partial class MainWindowViewModel
     {
         public ObservableCollection<SetInputViewModel> InputList { get; set; }
 
         MemoryMappedFile _memoryMapFile;
 
-        public MainWindowViewModel() 
+        public MainWindowViewModel()
         {
             InputList = new ObservableCollection<SetInputViewModel>();
-            _memoryMapFile = MemoryMappedFile.OpenExisting("SimInputData");
-            LoadInput();
+            try
+            {
+                _memoryMapFile = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
+                LoadInput();
+                UpdateValue();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void SetValue(object sender, EventArgs e) 
+        private void UpdateValue()
+        {
+            byte[] values;
+
+            using (MemoryMappedViewStream stream = _memoryMapFile.CreateViewStream())
+            {
+                BinaryReader reader = new BinaryReader(stream);
+                values = reader.ReadBytes(256);
+            }
+
+            for (int i = 0; i < InputList.Count; i++)
+            {
+                InputList.First(input => input.Id == i).Value = values[i] == 1;
+            }    
+        }
+
+        private void SetValue(object sender, EventArgs e)
         {
             int index = (sender as SetInputViewModel).Id;
 
             using (MemoryMappedViewStream stream = _memoryMapFile.CreateViewStream(index, 0))
             {
                 BinaryWriter writer = new BinaryWriter(stream);
-                if((sender as SetInputViewModel).Value)
+                if ((sender as SetInputViewModel).Value)
                 {
                     writer.Write((char)1);
                 }
@@ -48,13 +74,16 @@ namespace SimulationInputWindow
             var inputList = Enum.GetNames(typeof(EInput)).ToList();
             var inputValues = (EInput[])Enum.GetValues(typeof(EInput));
 
-            for (int i = 0; i < inputList.Count; i++)
+            for (int i = 0; i < inputList.Count / 6; i++)
             {
-                SetInputViewModel inputNew = new SetInputViewModel((int)inputValues[i]);
-                inputNew.Name = inputList[i];
-                inputNew.SetValueEvent += SetValue;
+                for (int j = 0; j < 6; j++)
+                {
+                    SetInputViewModel inputNew = new SetInputViewModel((int)inputValues[i + 16 * j]);
+                    inputNew.Name = inputList[i + 16 * j];
+                    inputNew.SetValueEvent += SetValue;
 
-                InputList.Add(inputNew);
+                    InputList.Add(inputNew);
+                }
             }
         }
     }

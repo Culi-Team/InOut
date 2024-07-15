@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimulationInputWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="550" Width="1200">
+    <Grid Grid.IsSharedSizeScope="True">
         <ScrollViewer>
             <ItemsControl ItemsSource="{Binding InputList}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="4">
+                        <UniformGrid Columns="6">
 
                         </UniformGrid>
                     </ItemsPanelTemplate>
