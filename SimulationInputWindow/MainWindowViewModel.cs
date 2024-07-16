@@ -69,10 +69,10 @@ namespace SimulationInputWindow
             }
         }
 
-        private void LoadInput()
+        private void LoadInput<T>() where T : Enum
         {
-            var inputList = Enum.GetNames(typeof(EInput)).ToList();
-            var inputValues = (EInput[])Enum.GetValues(typeof(EInput));
+            var inputList = Enum.GetNames(typeof(T)).ToList();
+            var inputValues = (int[])Enum.GetValues(typeof(T));
 
             for (int i = 0; i < inputList.Count / 6; i++)
             {
