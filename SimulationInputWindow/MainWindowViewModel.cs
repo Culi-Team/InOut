@@ -25,7 +25,7 @@ namespace SimulationInputWindow
             try
             {
                 _memoryMapFile = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
-                LoadInput();
+                LoadInput<EInput>();
                 UpdateValue();
             }
             catch (Exception ex)
