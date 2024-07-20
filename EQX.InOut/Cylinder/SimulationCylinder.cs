@@ -15,7 +15,7 @@ namespace EQX.InOut
         #endregion
 
         #region Override methods
-        public override void Forward()
+        protected override void ForwardAction()
         {
             if (OutForward != null & OutBackward != null)
             {
@@ -47,7 +47,7 @@ namespace EQX.InOut
             }
         }
 
-        public override void Backward()
+        protected override void BackwardAction()
         {
             if (OutForward != null & OutBackward != null)
             {

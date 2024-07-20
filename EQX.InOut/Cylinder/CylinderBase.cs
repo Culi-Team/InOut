@@ -1,8 +1,9 @@
-﻿using EQX.Core.InOut;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using EQX.Core.InOut;
 
 namespace EQX.InOut
 {
-    public class CylinderBase : ICylinder
+    public class CylinderBase : ObservableObject, ICylinder
     {
         #region Properties
         public int Id { get; internal set; }
@@ -75,13 +76,24 @@ namespace EQX.InOut
         #endregion
 
         #region Public methods
-        public virtual void Forward()
+        public void Forward()
         {
+            ForwardAction();
+
+            OnPropertyChanged(nameof(IsForward));
+            OnPropertyChanged(nameof(IsBackward));
         }
 
-        public virtual void Backward()
+        public void Backward()
         {
+            BackwardAction();
+
+            OnPropertyChanged(nameof(IsForward));
+            OnPropertyChanged(nameof(IsBackward));
         }
+
+        protected virtual void ForwardAction() { }
+        protected virtual void BackwardAction() { }
         #endregion
 
         #region Protected
