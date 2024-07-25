@@ -20,6 +20,7 @@ namespace SimulationInputWindow
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+            cbMachineType.ItemsSource = new List<EMachineType> { EMachineType.Tray2CST,EMachineType.CST2CST };
         }
     }
 }
