@@ -1,39 +1,13 @@
 ﻿using EQX.Core.InOut;
-using System.IO.MemoryMappedFiles;
-using System.Reflection;
 
 namespace EQX.InOut
 {
-    public static class SimulationInputSetter
-    {
-        public static void SetSimInput(IDInput? input, bool value)
-        {
-            if (input == null) return;
-
-            using (MemoryMappedViewStream stream = _mmf.CreateViewStream(input.Id, 0))
-            {
-                BinaryWriter writer = new BinaryWriter(stream);
-                if (value)
-                {
-                    writer.Write((char)1);
-                }
-                else
-                {
-                    writer.Write((char)0);
-                }
-            }
-        }
-
-        static MemoryMappedFile _mmf = MemoryMappedFile.OpenExisting("SimInputData");
-    }
-
     public class SimulationCylinder : CylinderBase
     {
         #region Constructors
         public SimulationCylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
             : base(inForward, inBackward, outForward, outBackward)
         {
-            _mmf = MemoryMappedFile.OpenExisting("SimInputData");
         }
         #endregion
 
@@ -108,25 +82,11 @@ namespace EQX.InOut
         #region Private methods
         private void SetSimInput(IDInput? input, bool value)
         {
-            if (input == null) return;
-
-            using (MemoryMappedViewStream stream = _mmf.CreateViewStream(input.Id, 0))
-            {
-                BinaryWriter writer = new BinaryWriter(stream);
-                if (value)
-                {
-                    writer.Write((char)1);
-                }
-                else
-                {
-                    writer.Write((char)0);
-                }
-            }
+            SimulationInputSetter.SetSimInput(input, value);
         }
         #endregion
 
         #region Privates
-        MemoryMappedFile _mmf;
         #endregion
     }
 }
