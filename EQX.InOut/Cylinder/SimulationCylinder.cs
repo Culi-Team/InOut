@@ -60,6 +60,7 @@ namespace EQX.InOut
                 OutBackward!.Value = false;
 
                 SetSimInput(InBackward, false);
+                SetSimInput(InForward, true);
             }
             else
             {
@@ -67,6 +68,7 @@ namespace EQX.InOut
                 OutForward!.Value = true;
 
                 SetSimInput(InForward, true);
+                SetSimInput(InBackward, false);
             }
         }
 
@@ -91,12 +93,14 @@ namespace EQX.InOut
                 // Only backward is not null
                 OutBackward!.Value = true;
                 SetSimInput(InBackward, true);
+                SetSimInput(InForward, false);
             }
             else
             {
                 // Only forward is not null
                 OutForward!.Value = false;
                 SetSimInput(InForward, false);
+                SetSimInput(InBackward, true);
             }
         }
         #endregion
