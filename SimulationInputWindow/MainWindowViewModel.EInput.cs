@@ -26,7 +26,7 @@
             LEFTIN_SLIDER_LOCK,
             LEFTIN_SLIDER_END,
             LEFTIN_TRAY_DET1,
-            LEFTIN_TRAY_DET2,
+            LEFTIN_TRAY_TYPE,
             LEFTIN_TRAY_END_UP,
             LEFTIN_TRAY_ALIGN,
             LEFTIN_TRAY_UNALIGN,
