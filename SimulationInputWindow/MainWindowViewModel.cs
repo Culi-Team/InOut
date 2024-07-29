@@ -252,7 +252,7 @@ namespace SimulationInputWindow
             EInputTray2CST.LEFTIN_SLIDER_LOCK,
             EInputTray2CST.LEFTIN_SLIDER_END,
             EInputTray2CST.LEFTIN_TRAY_DET1,
-            EInputTray2CST.LEFTIN_TRAY_DET2,
+            EInputTray2CST.LEFTIN_TRAY_TYPE,
             EInputTray2CST.LEFTIN_TRAY_END_UP,
             EInputTray2CST.LEFTIN_TRAY_ALIGN,
             EInputTray2CST.LEFTIN_TRANS_BW,
