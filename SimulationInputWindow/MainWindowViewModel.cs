@@ -77,6 +77,33 @@ namespace SimulationInputWindow
                 });
             }
         }
+        
+        public ICommand SetInputToStart
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    switch (SelectedMachineType)
+                    {
+                        case EMachineType.Tray2CST:
+                            foreach (var input in InputListToStartTray2CST)
+                            {
+                                SetValue((int)input, true);
+                            }
+                            break;
+                        case EMachineType.CST2CST:
+                            foreach (var input in InputListToStartCST2CST)
+                            {
+                                SetValue((int)input, true);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            }
+        }
         public ICommand SetInputToAutoRun
         {
             get
@@ -216,6 +243,71 @@ namespace SimulationInputWindow
             EInputCST2CST.RIGHTIN_SLIDER_END,
             EInputCST2CST.SUPPLIER_SLIDER_END,
             EInputCST2CST.NGTRAY_SLIDER_END
+        };
+
+        private List<EInputTray2CST> InputListToStartTray2CST = new List<EInputTray2CST>
+        {
+            EInputTray2CST.MAIN_AIR,
+            EInputTray2CST.LEFTIN_DOOR_LOCK,
+            EInputTray2CST.LEFTIN_SLIDER_LOCK,
+            EInputTray2CST.LEFTIN_SLIDER_END,
+            EInputTray2CST.LEFTIN_TRAY_DET1,
+            EInputTray2CST.LEFTIN_TRAY_DET2,
+            EInputTray2CST.LEFTIN_TRAY_END_UP,
+            EInputTray2CST.LEFTIN_TRAY_ALIGN,
+            EInputTray2CST.LEFTIN_TRANS_BW,
+            EInputTray2CST.LEFTIN_TRANS_UP,
+            EInputTray2CST.LEFTIN_TRANS_UNGRIP,
+            EInputTray2CST.RIGHTIN_DOOR_LOCK,
+            EInputTray2CST.RIGHTIN_SLIDER_LOCK,
+            EInputTray2CST.RIGHTIN_SLIDER_END,
+            EInputTray2CST.RIGHTIN_CST_DET,
+            EInputTray2CST.RIGHTIN_CST_UP,
+            EInputTray2CST.RIGHTIN_SPT_UP,
+            EInputTray2CST.NGTRAY_DOOR_LOCK,
+            EInputTray2CST.NGTRAY_SLIDER_LOCK,
+            EInputTray2CST.NGTRAY_SLIDER_END,
+            EInputTray2CST.NGTRAY_TRAY_DET1,
+            EInputTray2CST.NGTRAY_TRAY_DET2,
+            EInputTray2CST.NGTRAY_TRAY_END_UP,
+            EInputTray2CST.NGTRAY_TRAY_UNALIGN,
+            EInputTray2CST.NGTRAY_TRANS_BW,
+            EInputTray2CST.NGTRAY_TRANS_UP,
+            EInputTray2CST.SUPPLIER_SLIDER_END,
+            EInputTray2CST.STOPMESS,
+            EInputTray2CST.PERI_RDY,
+            EInputTray2CST.USER_SAF,
+            EInputTray2CST.IO_ACTCONF,
+            EInputTray2CST.ON_PATH,
+        };
+
+        private List<EInputCST2CST> InputListToStartCST2CST = new List<EInputCST2CST>
+        {
+            EInputCST2CST.MAIN_AIR,
+            EInputCST2CST.LEFTIN_DOOR_LOCK,
+            EInputCST2CST.LEFTIN_SLIDER_LOCK,
+            EInputCST2CST.LEFTIN_SLIDER_END,
+            EInputCST2CST.RIGHTIN_DOOR_LOCK,
+            EInputCST2CST.RIGHTIN_SLIDER_LOCK,
+            EInputCST2CST.RIGHTIN_SLIDER_END,
+            EInputCST2CST.RIGHTIN_CST_DET,
+            EInputCST2CST.RIGHTIN_CST_UP,
+            EInputCST2CST.RIGHTIN_SPT_UP,
+            EInputCST2CST.NGTRAY_DOOR_LOCK,
+            EInputCST2CST.NGTRAY_SLIDER_LOCK,
+            EInputCST2CST.NGTRAY_SLIDER_END,
+            EInputCST2CST.NGTRAY_TRAY_DET1,
+            EInputCST2CST.NGTRAY_TRAY_DET2,
+            EInputCST2CST.NGTRAY_TRAY_END_UP,
+            EInputCST2CST.NGTRAY_TRAY_UNALIGN,
+            EInputCST2CST.NGTRAY_TRANS_BW,
+            EInputCST2CST.NGTRAY_TRANS_UP,
+            EInputCST2CST.SUPPLIER_SLIDER_END,
+            EInputCST2CST.STOPMESS,
+            EInputCST2CST.PERI_RDY,
+            EInputCST2CST.USER_SAF,
+            EInputCST2CST.IO_ACTCONF,
+            EInputCST2CST.ON_PATH,
         };
     }
 }

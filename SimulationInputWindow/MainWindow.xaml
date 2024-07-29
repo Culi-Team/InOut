@@ -21,6 +21,12 @@
                     Width="150"
                     Cursor="Hand"
                     Margin="5 0 0 0" />
+            <Button Content="Set To Start"
+                    Command="{Binding SetInputToStart}"
+                    FontSize="15"
+                    Width="150"
+                    Cursor="Hand"
+                    Margin="5 0 0 0" />
             <!--<Button Content="Set To AutoRun"
                     Command="{Binding SetInputToAutoRun}"
                     FontSize="15"
