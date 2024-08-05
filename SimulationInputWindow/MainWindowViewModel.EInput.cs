@@ -1,6 +1,6 @@
 ﻿namespace SimulationInputWindow
 {
-    public partial class MainWindowViewModel 
+    public partial class MainWindowViewModel
     {
         public enum EInputTray2CST
         {
@@ -26,7 +26,7 @@
             LEFTIN_SLIDER_LOCK,
             LEFTIN_SLIDER_END,
             LEFTIN_TRAY_DET1,
-            LEFTIN_TRAY_TYPE,
+            LEFTIN_TRAY_DET2,
             LEFTIN_TRAY_END_UP,
             LEFTIN_TRAY_ALIGN,
             LEFTIN_TRAY_UNALIGN,
@@ -36,7 +36,6 @@
             LEFTIN_TRANS_DOWN,
             LEFTIN_TRANS_GRIP,
             LEFTIN_TRANS_UNGRIP,
-
             SPARE_IN32,
             SPARE_IN33,
             RIGHTIN_CHANGE_SW,
@@ -69,13 +68,12 @@
             NGTRAY_TRANS_DOWN,
             NGTRAY_TRANS_VAC,
             SPARE_IN63,
-
             SPARE_IN64,
             SPARE_IN65,
             SPARE_IN66,
             SPARE_IN67,
-            TRAYSUPPLIER_CHANGE_SW,
-            TRAYSUPPLIER_READY_SW,
+            SUPPLIER_CHANGE_SW,
+            SUPPLIER_READY_SW,
             SUPPLIER_SLIDER_LOCK,
             SUPPLIER_SLIDER_END,
             SUPPLIER_DOOR_LOCK,
@@ -94,8 +92,8 @@
             ON_PATH,
             PRO_ACT,
             IN_HOME,
-            ROBOT_TOOL_6IN,
-            ROBOT_TOOL_8IN,
+            SPARE_IN88,    
+            SPARE_IN89,
             ROBOT_VACUUM_1,
             SPARE_IN91,
             ROBOT_VACUUM_2,
@@ -138,7 +136,6 @@
             SPARE_IN29,
             SPARE_IN30,
             SPARE_IN31,
-
             SPARE_IN32,
             SPARE_IN33,
             RIGHTIN_CHANGE_SW,
@@ -171,7 +168,6 @@
             NGTRAY_TRANS_DOWN,
             NGTRAY_TRANS_VAC,
             SPARE_IN63,
-
             SPARE_IN64,
             SPARE_IN65,
             SPARE_IN66,
@@ -196,8 +192,8 @@
             ON_PATH,
             PRO_ACT,
             IN_HOME,
-            ROBOT_TOOL_6IN,
-            ROBOT_TOOL_8IN,
+            SPARE_IN88,
+            SPARE_IN89,
             ROBOT_VACUUM_1,
             SPARE_IN91,
             ROBOT_VACUUM_2,
