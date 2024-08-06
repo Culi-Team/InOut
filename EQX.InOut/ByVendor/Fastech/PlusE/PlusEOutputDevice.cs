@@ -42,12 +42,13 @@ namespace EQX.InOut
 
         protected override bool GetOutput(int index)
         {
-            uint outputStatus = 0;
-            int result = NativeLib.FAS_GetIOOutput(Id, ref outputStatus);
+            uint uOutput = 0;
+            uint uStatus = 0;
+            int result = NativeLib.FAS_GetOutput(Id, ref uOutput, ref uStatus);
 
             if (result == EziPlusEDIOLib.FMM_OK)
             {
-                return (outputStatus & (0x01ul << index)) > 0;
+                return (uOutput & (0x01ul << index)) > 0;
             }
 
             return false;
