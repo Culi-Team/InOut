@@ -1,32 +1,30 @@
 ﻿using EQX.ThirdParty.Fastech;
-using System.Net;
-using NativeLib = FASTECH.EziMOTIONPlusELib;
 
 namespace EQX.InOut
 {
-    public class PlusEInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
+    public class PlusEInputDeviceCustom<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         #region Constructor(s)
-        public PlusEInputDevice(int id, string name, int maxPin, int offset = 0)
+        public PlusEInputDeviceCustom(int id, string name, int maxPin, int offset = 0)
             : base(id, name, maxPin, offset)
         {
-            iPAddress = IPAddress.Parse($"192.168.0.{id}");
+            nativeLib = new EziPlusEDIOLib(id, name);
         }
         #endregion
 
         #region Public methods
         public override bool Connect()
         {
-            bool result = NativeLib.FAS_Connect(iPAddress, Id);
+            bool result = nativeLib.Connect();
             IsConnected = result;
             return result;
         }
 
         public override bool Disconnect()
         {
-            NativeLib.FAS_Close(Id);
+            bool result = nativeLib.Disconnect();
             IsConnected = false;
-            return true;
+            return result;
         }
         #endregion
 
@@ -34,7 +32,7 @@ namespace EQX.InOut
         protected override bool GetInput(int index)
         {
             uint inputStatus = 0, latchStatus = 0;
-            int result = NativeLib.FAS_GetInput(Id, ref inputStatus, ref latchStatus);
+            int result = nativeLib.GetInput(ref inputStatus, ref latchStatus);
             if (result == EziPlusEDIOLib.FMM_OK)
             {
                 return (inputStatus & (0x01 << index)) > 0;
@@ -45,7 +43,7 @@ namespace EQX.InOut
         #endregion
 
         #region Privates
-        private IPAddress iPAddress;
+        private readonly EziPlusEDIOLib nativeLib;
         #endregion
     }
 }

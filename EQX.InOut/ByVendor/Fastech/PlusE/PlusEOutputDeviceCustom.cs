@@ -1,30 +1,28 @@
 ﻿using EQX.ThirdParty.Fastech;
-using System.Net;
-using NativeLib = FASTECH.EziMOTIONPlusELib;
 
 namespace EQX.InOut
 {
-    public class PlusEOutputDevice<TEnum> : OutputDeviceBase<TEnum>
+    public class PlusEOutputDeviceCustom<TEnum> : OutputDeviceBase<TEnum>
     {
-        public PlusEOutputDevice(int id, string name, int maxPin, int offset = 0)
+        public PlusEOutputDeviceCustom(int id, string name, int maxPin, int offset = 0)
             : base(id, name, maxPin, offset)
         {
-            iPAddress = IPAddress.Parse($"192.168.0.{id}");
+            nativeLib = new EziPlusEDIOLib(id, name);
         }
 
         #region Public methods
         public override bool Connect()
         {
-            bool result = NativeLib.FAS_Connect(iPAddress, Id);
+            bool result = nativeLib.Connect();
             IsConnected = result;
             return result;
         }
 
         public override bool Disconnect()
         {
-            NativeLib.FAS_Close(Id);
+            bool result = nativeLib.Disconnect();
             IsConnected = false;
-            return true;
+            return result;
         }
         #endregion
 
@@ -35,15 +33,15 @@ namespace EQX.InOut
             if (value) setOutputData = ((uint)(0x01 << index));
             else resetOutputData = ((uint)(0x01 << index));
 
-            NativeLib.FAS_SetOutput(Id, setOutputData, resetOutputData);
+            nativeLib.SetOutput(setOutputData, resetOutputData);
 
             return true;
         }
 
         protected override bool GetOutput(int index)
         {
-            uint outputStatus = 0;
-            int result = NativeLib.FAS_GetIOOutput(Id, ref outputStatus);
+            ulong outputStatus = 0;
+            int result = nativeLib.GetOutput(ref outputStatus);
 
             if (result == EziPlusEDIOLib.FMM_OK)
             {
@@ -53,6 +51,6 @@ namespace EQX.InOut
             return false;
         }
 
-        private IPAddress iPAddress;
+        private readonly EziPlusEDIOLib nativeLib;
     }
 }
