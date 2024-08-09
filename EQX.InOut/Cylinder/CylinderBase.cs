@@ -72,6 +72,15 @@ namespace EQX.InOut
             InBackward = inBackward;
             OutForward = outForward;
             OutBackward = outBackward;
+
+            if (InForward != null) InForward.ValueUpdated += InForward_ValueUpdated;
+            if (InBackward != null) InBackward.ValueUpdated += InForward_ValueUpdated;
+        }
+
+        private void InForward_ValueUpdated(object? sender, EventArgs e)
+        {
+            OnPropertyChanged(nameof(IsForward));
+            OnPropertyChanged(nameof(IsBackward));
         }
         #endregion
 
@@ -79,17 +88,11 @@ namespace EQX.InOut
         public void Forward()
         {
             ForwardAction();
-
-            OnPropertyChanged(nameof(IsForward));
-            OnPropertyChanged(nameof(IsBackward));
         }
 
         public void Backward()
         {
             BackwardAction();
-
-            OnPropertyChanged(nameof(IsForward));
-            OnPropertyChanged(nameof(IsBackward));
         }
 
         protected virtual void ForwardAction() { }

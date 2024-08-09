@@ -20,7 +20,7 @@ namespace EQX.InOut
             mmf.Dispose();
         }
 
-        protected override bool GetInput(int index)
+        protected override bool ActualGetInput(int index)
         {
             byte[] values;
 

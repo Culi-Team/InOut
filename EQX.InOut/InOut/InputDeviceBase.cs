@@ -9,6 +9,7 @@ namespace EQX.InOut
         public int Id { get; init; }
         public string Name { get; init; }
         public virtual bool IsConnected { get; protected set; }
+
         public bool this[int index] => GetInput(index % _maxPin);
         #endregion
 
@@ -45,9 +46,15 @@ namespace EQX.InOut
         }
         #endregion
 
-        protected virtual bool GetInput(int index)
+        protected virtual bool ActualGetInput(int index)
         {
             return true;
+        }
+
+        private bool GetInput(int index)
+        {
+            bool newValue = ActualGetInput(index);
+            return newValue;
         }
 
         #region Privates

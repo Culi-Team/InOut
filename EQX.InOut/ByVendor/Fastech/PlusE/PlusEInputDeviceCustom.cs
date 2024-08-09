@@ -29,7 +29,7 @@ namespace EQX.InOut
         #endregion
 
         #region Private methods
-        protected override bool GetInput(int index)
+        protected override bool ActualGetInput(int index)
         {
             uint inputStatus = 0, latchStatus = 0;
             int result = nativeLib.GetInput(ref inputStatus, ref latchStatus);

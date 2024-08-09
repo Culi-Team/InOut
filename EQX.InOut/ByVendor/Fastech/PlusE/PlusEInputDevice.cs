@@ -31,7 +31,7 @@ namespace EQX.InOut
         #endregion
 
         #region Private methods
-        protected override bool GetInput(int index)
+        protected override bool ActualGetInput(int index)
         {
             uint inputStatus = 0, latchStatus = 0;
             int result = NativeLib.FAS_GetInput(Id, ref inputStatus, ref latchStatus);

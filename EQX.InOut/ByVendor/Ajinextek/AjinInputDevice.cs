@@ -32,7 +32,7 @@
         #endregion
 
         #region Private methods
-        protected override bool GetInput(int index)
+        protected override bool ActualGetInput(int index)
         {
             CAXD.AxdiReadInport(index, ref oldValue);
 
