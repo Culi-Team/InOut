@@ -10,6 +10,8 @@ namespace EQX.InOut
 
         public string Name { get; internal set; }
 
+        public ECylinderType CylinderType { get; set; }
+
         public bool IsForward
         {
             get
