@@ -216,10 +216,10 @@ namespace SimulationInputWindow
                 switch (value)
                 {
                     case EMachineType.Tray2CST:
-                        LoadInput<EInputTray2CST>();
+                        LoadInput<EInputT2C>();
                         break;
                     case EMachineType.CST2CST:
-                        LoadInput<EInputCST2CST>();
+                        LoadInput<EInputC2C>();
                         break;
                 }
             }
@@ -227,88 +227,96 @@ namespace SimulationInputWindow
 
         private EMachineType _SelectedMachineType;
 
-        private List<EInputTray2CST> InputListToOriginTray2CST = new List<EInputTray2CST>
+        private List<EInputT2C> InputListToOriginTray2CST = new List<EInputT2C>
         {
-            EInputTray2CST.MAIN_AIR,
-            EInputTray2CST.LEFTIN_SLIDER_END,
-            EInputTray2CST.RIGHTIN_SLIDER_END,
-            EInputTray2CST.SUPPLIER_SLIDER_END,
-            EInputTray2CST.NGTRAY_SLIDER_END
+            EInputT2C.MAIN_AIR,
+            EInputT2C.LEFTIN_SLIDER_END,
+            EInputT2C.RIGHTIN_SLIDER_END,
+            EInputT2C.SUPPLIER_SLIDER_END,
+            EInputT2C.NGTRAY_SLIDER_END
         };
 
-        private List<EInputCST2CST> InputListToOriginCST2CST = new List<EInputCST2CST>
+        private List<EInputC2C> InputListToOriginCST2CST = new List<EInputC2C>
         {
-            EInputCST2CST.MAIN_AIR,
-            EInputCST2CST.LEFTIN_SLIDER_END,
-            EInputCST2CST.RIGHTIN_SLIDER_END,
-            EInputCST2CST.SUPPLIER_SLIDER_END,
-            EInputCST2CST.NGTRAY_SLIDER_END
+            EInputC2C.MAIN_AIR,
+            EInputC2C.LEFTIN_SLIDER_END,
+            EInputC2C.RIGHTIN_SLIDER_END,
+            EInputC2C.SUPPLIER_SLIDER_END,
+            EInputC2C.NGTRAY_SLIDER_END
         };
 
-        private List<EInputTray2CST> InputListToStartTray2CST = new List<EInputTray2CST>
+        private List<EInputT2C> InputListToStartTray2CST = new List<EInputT2C>
         {
-            EInputTray2CST.MAIN_AIR,
-            EInputTray2CST.LEFTIN_DOOR_LOCK,
-            EInputTray2CST.LEFTIN_SLIDER_LOCK,
-            EInputTray2CST.LEFTIN_SLIDER_END,
-            EInputTray2CST.LEFTIN_TRAY_DET1,
-            EInputTray2CST.LEFTIN_TRAY_DET2,
-            EInputTray2CST.LEFTIN_TRAY_END_UP,
-            EInputTray2CST.LEFTIN_TRAY_ALIGN,
-            EInputTray2CST.LEFTIN_TRANS_BW,
-            EInputTray2CST.LEFTIN_TRANS_UP,
-            EInputTray2CST.LEFTIN_TRANS_UNGRIP,
-            EInputTray2CST.RIGHTIN_DOOR_LOCK,
-            EInputTray2CST.RIGHTIN_SLIDER_LOCK,
-            EInputTray2CST.RIGHTIN_SLIDER_END,
-            EInputTray2CST.RIGHTIN_CST_DET,
-            EInputTray2CST.RIGHTIN_CST_UP,
-            EInputTray2CST.RIGHTIN_SPT_UP,
-            EInputTray2CST.NGTRAY_DOOR_LOCK,
-            EInputTray2CST.NGTRAY_SLIDER_LOCK,
-            EInputTray2CST.NGTRAY_SLIDER_END,
-            EInputTray2CST.NGTRAY_TRAY_DET1,
-            EInputTray2CST.NGTRAY_TRAY_DET2,
-            EInputTray2CST.NGTRAY_TRAY_END_UP,
-            EInputTray2CST.NGTRAY_TRAY_UNALIGN,
-            EInputTray2CST.NGTRAY_TRANS_BW,
-            EInputTray2CST.NGTRAY_TRANS_UP,
-            EInputTray2CST.SUPPLIER_SLIDER_END,
-            EInputTray2CST.PERI_RDY,
-            EInputTray2CST.USER_SAF,
-            EInputTray2CST.IO_ACTCONF,
-            EInputTray2CST.ON_PATH,
+            EInputT2C.MAIN_AIR,
+            EInputT2C.LEFTIN_DOOR_LOCK,
+            EInputT2C.LEFTIN_SLIDER_LOCK,
+            EInputT2C.LEFTIN_SLIDER_END,
+            EInputT2C.LEFTIN_TRAY_DET1,
+            EInputT2C.LEFTIN_TRAY_TYPE,
+            EInputT2C.LEFTIN_TRAY_END_UP,
+            EInputT2C.LEFTIN_TRAY_ALIGN,
+            EInputT2C.LEFTIN_TRANS_BW,
+            EInputT2C.LEFTIN_TRANS_UP,
+            EInputT2C.LEFTIN_TRANS_UNGRIP,
+            EInputT2C.RIGHTIN_DOOR_LOCK,
+            EInputT2C.RIGHTIN_SLIDER_LOCK,
+            EInputT2C.RIGHTIN_SLIDER_END,
+            EInputT2C.RIGHTIN_CST_DET,
+            EInputT2C.RIGHTIN_CST_UP,
+            EInputT2C.RIGHTIN_SPT_UP,
+            EInputT2C.NGTRAY_DOOR_LOCK,
+            EInputT2C.NGTRAY_SLIDER_LOCK,
+            EInputT2C.NGTRAY_SLIDER_END,
+            EInputT2C.NGTRAY_TRAY_DET1,
+            EInputT2C.NGTRAY_TRAY_DET2,
+            EInputT2C.NGTRAY_TRAY_END_UP,
+            EInputT2C.NGTRAY_TRAY_UNALIGN,
+            EInputT2C.NGTRAY_TRANS_BW,
+            EInputT2C.NGTRAY_TRANS_UP,
+            EInputT2C.SUPPLIER_SLIDER_LOCK,
+            EInputT2C.SUPPLIER_SLIDER_END,
+            EInputT2C.SUPPLIER_DOOR_LOCK,
+            EInputT2C.TRAYSUPPLIER_TRAY_DET1,
+            EInputT2C.PERI_RDY,
+            EInputT2C.ALARM_STOP,
+            EInputT2C.USER_SAF,
+            EInputT2C.IO_ACTCONF,
+            EInputT2C.ON_PATH,
+            EInputT2C.PRO_ACT,
         };
 
-        private List<EInputCST2CST> InputListToStartCST2CST = new List<EInputCST2CST>
+        private List<EInputC2C> InputListToStartCST2CST = new List<EInputC2C>
         {
-            EInputCST2CST.MAIN_AIR,
-            EInputCST2CST.LEFTIN_DOOR_LOCK,
-            EInputCST2CST.LEFTIN_SLIDER_LOCK,
-            EInputCST2CST.LEFTIN_SLIDER_END,
-            EInputCST2CST.LEFTIN_CST_DET,
-            EInputCST2CST.LEFTIN_CST_UP,
-            EInputCST2CST.LEFTIN_SPT_UP,
-            EInputCST2CST.RIGHTIN_DOOR_LOCK,
-            EInputCST2CST.RIGHTIN_SLIDER_LOCK,
-            EInputCST2CST.RIGHTIN_SLIDER_END,
-            EInputCST2CST.RIGHTIN_CST_DET,
-            EInputCST2CST.RIGHTIN_CST_UP,
-            EInputCST2CST.RIGHTIN_SPT_DOWN,
-            EInputCST2CST.NGTRAY_DOOR_LOCK,
-            EInputCST2CST.NGTRAY_SLIDER_LOCK,
-            EInputCST2CST.NGTRAY_SLIDER_END,
-            EInputCST2CST.NGTRAY_TRAY_DET1,
-            EInputCST2CST.NGTRAY_TRAY_END_UP,
-            EInputCST2CST.NGTRAY_TRANS_BW,
-            EInputCST2CST.NGTRAY_TRANS_UP,
-            EInputCST2CST.SUPPLIER_SLIDER_LOCK,
-            EInputCST2CST.SUPPLIER_SLIDER_END,
-            EInputCST2CST.SUPPLIER_DOOR_LOCK,
-            EInputCST2CST.PERI_RDY,
-            EInputCST2CST.USER_SAF,
-            EInputCST2CST.IO_ACTCONF,
-            EInputCST2CST.ON_PATH,
+            EInputC2C.MAIN_AIR,
+            EInputC2C.LEFTIN_DOOR_LOCK,
+            EInputC2C.LEFTIN_SLIDER_LOCK,
+            EInputC2C.LEFTIN_SLIDER_END,
+            EInputC2C.LEFTIN_CST_DET,
+            EInputC2C.LEFTIN_CST_UP,
+            EInputC2C.LEFTIN_SPT_UP,
+            EInputC2C.RIGHTIN_DOOR_LOCK,
+            EInputC2C.RIGHTIN_SLIDER_LOCK,
+            EInputC2C.RIGHTIN_SLIDER_END,
+            EInputC2C.RIGHTIN_CST_DET,
+            EInputC2C.RIGHTIN_CST_UP,
+            EInputC2C.RIGHTIN_SPT_DOWN,
+            EInputC2C.NGTRAY_DOOR_LOCK,
+            EInputC2C.NGTRAY_SLIDER_LOCK,
+            EInputC2C.NGTRAY_SLIDER_END,
+            EInputC2C.NGTRAY_TRAY_DET1,
+            EInputC2C.NGTRAY_TRAY_END_UP,
+            EInputC2C.NGTRAY_TRANS_BW,
+            EInputC2C.NGTRAY_TRANS_UP,
+            EInputC2C.SUPPLIER_SLIDER_LOCK,
+            EInputC2C.SUPPLIER_SLIDER_END,
+            EInputC2C.SUPPLIER_DOOR_LOCK,
+            EInputC2C.TRAYSUPPLIER_TRAY_DET1,
+            EInputC2C.PERI_RDY,
+            EInputC2C.ALARM_STOP,
+            EInputC2C.USER_SAF,
+            EInputC2C.IO_ACTCONF,
+            EInputC2C.ON_PATH,
+            EInputC2C.PRO_ACT,
         };
     }
 }

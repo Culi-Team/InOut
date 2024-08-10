@@ -2,8 +2,9 @@
 {
     public partial class MainWindowViewModel
     {
-        public enum EInputTray2CST
+        public enum EInputT2C
         {
+            #region BOARD 1
             FRONT_START_SW,
             FRONT_STOP_SW,
             FRONT_RESET_SW,
@@ -26,7 +27,7 @@
             LEFTIN_SLIDER_LOCK,
             LEFTIN_SLIDER_END,
             LEFTIN_TRAY_DET1,
-            LEFTIN_TRAY_DET2,
+            LEFTIN_TRAY_TYPE,
             LEFTIN_TRAY_END_UP,
             LEFTIN_TRAY_ALIGN,
             LEFTIN_TRAY_UNALIGN,
@@ -36,7 +37,10 @@
             LEFTIN_TRANS_DOWN,
             LEFTIN_TRANS_GRIP,
             LEFTIN_TRANS_UNGRIP,
-            SPARE_IN32,
+            #endregion
+
+            #region BOARD 2
+            LEFTIN_SUB_DOOR,
             SPARE_IN33,
             RIGHTIN_CHANGE_SW,
             RIGHTIN_READY_SW,
@@ -48,7 +52,7 @@
             RIGHTIN_CST_DOWN,
             RIGHTIN_SPT_UP,
             RIGHTIN_SPT_DOWN,
-            SPARE_IN44,
+            RIGHTIN_SUB_DOOR,
             SPARE_IN45,
             SPARE_IN46,
             SPARE_IN47,
@@ -67,20 +71,23 @@
             NGTRAY_TRANS_UP,
             NGTRAY_TRANS_DOWN,
             NGTRAY_TRANS_VAC,
-            SPARE_IN63,
+            NGTRAY_SUB_DOOR,
+            #endregion
+
+            #region BOARD 3
             SPARE_IN64,
             SPARE_IN65,
             SPARE_IN66,
             SPARE_IN67,
-            SUPPLIER_CHANGE_SW,
-            SUPPLIER_READY_SW,
+            TRAYSUPPLIER_CHANGE_SW,
+            TRAYSUPPLIER_READY_SW,
             SUPPLIER_SLIDER_LOCK,
             SUPPLIER_SLIDER_END,
             SUPPLIER_DOOR_LOCK,
             TRAYSUPPLIER_TRAY_DET1,
             TRAYSUPPLIER_TRAY_DET2,
             TRAYSUPPLIER_TRAY_END_UP,
-            SPARE_IN76,
+            TRAYSUPPLIER_SUB_DOOR,
             SPARE_IN77,
             SPARE_IN78,
             SPARE_IN79,
@@ -92,18 +99,20 @@
             ON_PATH,
             PRO_ACT,
             IN_HOME,
-            SPARE_IN88,    
-            SPARE_IN89,
             ROBOT_VACUUM_1,
-            SPARE_IN91,
+            SPARE_IN89,
             ROBOT_VACUUM_2,
+            SPARE_IN91,
+            ROBOT_VACUUM_3,
             SPARE_IN93,
             GLASS_DET_1,
-            GLASS_DET_2,
+            GLASS_DET_2
+            #endregion
         }
 
-        public enum EInputCST2CST
+        public enum EInputC2C
         {
+            #region BOARD 1
             FRONT_START_SW,
             FRONT_STOP_SW,
             FRONT_RESET_SW,
@@ -130,12 +139,15 @@
             LEFTIN_CST_DOWN,
             LEFTIN_SPT_UP,
             LEFTIN_SPT_DOWN,
-            SPARE_IN26,
+            LEFTIN_SUB_DOOR,
             SPARE_IN27,
             SPARE_IN28,
             SPARE_IN29,
             SPARE_IN30,
             SPARE_IN31,
+            #endregion
+
+            #region BOARD 2
             SPARE_IN32,
             SPARE_IN33,
             RIGHTIN_CHANGE_SW,
@@ -148,7 +160,7 @@
             RIGHTIN_CST_DOWN,
             RIGHTIN_SPT_UP,
             RIGHTIN_SPT_DOWN,
-            SPARE_IN44,
+            RIGHTIN_SUB_DOOR,
             SPARE_IN45,
             SPARE_IN46,
             SPARE_IN47,
@@ -167,7 +179,10 @@
             NGTRAY_TRANS_UP,
             NGTRAY_TRANS_DOWN,
             NGTRAY_TRANS_VAC,
-            SPARE_IN63,
+            NGTRAY_SUB_DOOR,
+            #endregion
+
+            #region BOARD 3
             SPARE_IN64,
             SPARE_IN65,
             SPARE_IN66,
@@ -180,7 +195,7 @@
             TRAYSUPPLIER_TRAY_DET1,
             TRAYSUPPLIER_TRAY_DET2,
             TRAYSUPPLIER_TRAY_END_UP,
-            SPARE_IN76,
+            TRAYSUPPLIER_SUB_DOOR,
             SPARE_IN77,
             SPARE_IN78,
             SPARE_IN79,
@@ -192,14 +207,15 @@
             ON_PATH,
             PRO_ACT,
             IN_HOME,
-            SPARE_IN88,
-            SPARE_IN89,
             ROBOT_VACUUM_1,
-            SPARE_IN91,
+            SPARE_IN89,
             ROBOT_VACUUM_2,
+            SPARE_IN91,
+            ROBOT_VACUUM_3,
             SPARE_IN93,
             GLASS_DET_1,
             GLASS_DET_2
+            #endregion
         }
     }
 }
