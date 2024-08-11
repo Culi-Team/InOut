@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EQX.Core.InOut;
+using log4net;
 
 namespace EQX.InOut
 {
@@ -89,11 +90,13 @@ namespace EQX.InOut
         #region Public methods
         public void Forward()
         {
+            LogManager.GetLogger($"{Name}").Debug("Forward");
             ForwardAction();
         }
 
         public void Backward()
         {
+            LogManager.GetLogger($"{Name}").Debug("Backward");
             BackwardAction();
         }
 
