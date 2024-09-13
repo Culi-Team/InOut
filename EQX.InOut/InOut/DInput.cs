@@ -5,11 +5,28 @@ namespace EQX.InOut
 {
     public class DInput : ObservableObject, IDInput
     {
+        private bool _oldValue;
+        private bool _currentValue;
         public event EventHandler ValueUpdated;
+        public event EventHandler ValueChanged;
         public int Id { get; init; }
         public string Name { get; init; }
-        public bool Value => _dInputDevice[Id];
+        public bool Value
+        {
+            get
+            {
 
+                _oldValue = _currentValue;
+                _currentValue = _dInputDevice[Id];
+
+                if (_oldValue != _currentValue)
+                {
+                    ValueChanged?.Invoke(this, EventArgs.Empty);
+                }
+
+                return _currentValue;
+            }
+        }
         public DInput(int id, string name, IDInputDevice dInputDevice)
         {
             Id = id;
