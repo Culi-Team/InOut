@@ -31,6 +31,7 @@ namespace EQX.InOut
             Outputs = new List<IDOutput>();
             for (int i = offset; i < offset + maxPin; i++)
             {
+                if (i >= outputList.Count) break;
                 Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
             }
         }

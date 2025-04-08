@@ -24,11 +24,11 @@ namespace EQX.InOut
             var inputList = Enum.GetNames(typeof(TEnum)).ToList();
             var inputIndex = (int[])Enum.GetValues(typeof(TEnum));
 
-            if (offset + maxPin > inputList.Count) throw new ArgumentOutOfRangeException();
-
             Inputs = new List<IDInput>();
             for (int i = offset; i < offset + maxPin; i++)
             {
+                if (i >= inputList.Count) break;
+
                 Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
             }
         }
