@@ -4,10 +4,10 @@ namespace EQX.InOut
 {
     public class PlusEOutputDeviceCustom<TEnum> : OutputDeviceBase<TEnum>
     {
-        public PlusEOutputDeviceCustom(int id, string name, int maxPin, int offset = 0)
-            : base(id, name, maxPin, offset)
+        public PlusEOutputDeviceCustom()
+            : base()
         {
-            nativeLib = new EziPlusEDIOLib(id, name);
+            nativeLib = new EziPlusEDIOLib(Id, Name);
         }
 
         #region Public methods

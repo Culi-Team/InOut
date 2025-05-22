@@ -1,4 +1,6 @@
-﻿namespace EQX.InOut
+﻿#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace EQX.InOut
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class AjinInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
@@ -7,10 +9,6 @@
         #endregion
 
         #region Constructor(s)
-        public AjinInputDevice(int id, string name, int maxPin, int offset = 0)
-            : base(id, name, maxPin, offset)
-        {
-        }
         #endregion
 
         #region Public methods
@@ -25,16 +23,14 @@
 
         public override bool Disconnect()
         {
-            AXL.AxlClose();
-
-            return true;
+            return AXL.AxlClose() == (uint)AXT_FUNC_RESULT.AXT_RT_SUCCESS;
         }
         #endregion
 
         #region Private methods
         protected override bool ActualGetInput(int index)
         {
-            CAXD.AxdiReadInport(index, ref oldValue);
+            _ = CAXD.AxdiReadInport(index, ref oldValue);
 
             return oldValue == 1;
         }

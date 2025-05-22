@@ -1,12 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EQX.Core.InOut;
+using System;
 
+#pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace EQX.InOut
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class DInput : ObservableObject, IDInput
     {
-        public event EventHandler ValueUpdated;
-        public event EventHandler ValueChanged;
+        public event EventHandler? ValueUpdated;
+        public event EventHandler? ValueChanged;
         public int Id { get; init; }
         public string Name { get; init; }
         public bool Value => _dInputDevice[Id];
@@ -21,7 +24,7 @@ namespace EQX.InOut
 
         public void RaiseValueUpdated()
         {
-            OnPropertyChanged("Value");
+            OnPropertyChanged(nameof(Value));
             ValueUpdated?.Invoke(this, EventArgs.Empty);
 
             _oldValue = _currentValue;

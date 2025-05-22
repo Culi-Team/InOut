@@ -6,38 +6,43 @@ namespace EQX.InOut
     public class OutputDeviceBase<TEnum> : IDOutputDevice
     {
         #region Properties
-        public List<IDOutput> Outputs { get; }
+        public List<IDOutput> Outputs { get; private set; }
         public int Id { get; init; }
         public string Name { get; init; }
         public virtual bool IsConnected { get; protected set; }
+
         public bool this[int index]
         {
-            get => GetOutput(index % _maxPin);
-            set => SetOutput(index % _maxPin, value);
+            get => GetOutput(index % MaxPin);
+            set => SetOutput(index % MaxPin, value);
         }
+
+        public int MaxPin { get; init; }
         #endregion
 
         #region Constructor(s)
-        public OutputDeviceBase(int id, string name, int maxPin, int offset = 0)
+        public OutputDeviceBase()
         {
-            Id = id;
-            Name = name;
-
-            _maxPin = maxPin;
-
-            var outputList = Enum.GetNames(typeof(TEnum)).ToList();
-            var outputIndex = (int[])Enum.GetValues(typeof(TEnum));
-
+            Name ??= GetType().Name;
             Outputs = new List<IDOutput>();
-            for (int i = offset; i < offset + maxPin; i++)
-            {
-                if (i >= outputList.Count) break;
-                Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
-            }
         }
         #endregion
 
         #region Public methods
+        public bool Initialize()
+        {
+            var outputList = Enum.GetNames(typeof(TEnum)).ToList();
+            var outputIndex = (int[])Enum.GetValues(typeof(TEnum));
+
+            for (int i = 0; i < MaxPin; i++)
+            {
+                if (i >= outputList.Count) break;
+                Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
+            }
+
+            return true;
+        }
+
         public virtual bool Connect()
         {
             return true;
@@ -58,9 +63,5 @@ namespace EQX.InOut
         {
             return true;
         }
-
-        #region Privates
-        private int _maxPin;
-        #endregion
     }
 }

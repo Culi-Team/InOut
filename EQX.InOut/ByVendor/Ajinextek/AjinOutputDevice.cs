@@ -7,10 +7,6 @@
         #endregion
 
         #region Constructor(s)
-        public AjinOutputDevice(int id, string name, int maxPin, int offset = 0)
-            : base(id, name, maxPin, offset)
-        {
-        }
         #endregion
 
         #region Public methods

@@ -6,10 +6,10 @@ namespace EQX.InOut
 {
     public class PlusEOutputDevice<TEnum> : OutputDeviceBase<TEnum>
     {
-        public PlusEOutputDevice(int id, string name, int maxPin, int offset = 0)
-            : base(id, name, maxPin, offset)
+        public PlusEOutputDevice()
+            : base()
         {
-            iPAddress = IPAddress.Parse($"192.168.0.{id}");
+            iPAddress = IPAddress.Parse($"192.168.0.{Id}");
         }
 
         #region Public methods

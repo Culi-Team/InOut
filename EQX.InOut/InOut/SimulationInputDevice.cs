@@ -1,17 +1,16 @@
 ﻿using System.IO.MemoryMappedFiles;
-using System.Reflection;
 
+#pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace EQX.InOut
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class SimulationInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
-        MemoryMappedFile mmf;
+        readonly MemoryMappedFile mmf;
 
-        public SimulationInputDevice(int id, string name, int maxPin, int offset = 0)
-            : base(id, name, maxPin, offset)
+        public SimulationInputDevice()
+            : base()
         {
-            _offset = offset;
-
             mmf = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
         }
 

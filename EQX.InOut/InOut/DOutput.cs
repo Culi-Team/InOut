@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EQX.Core.InOut;
 
+#pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace EQX.InOut
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class DOutput : ObservableObject, IDOutput
     {
