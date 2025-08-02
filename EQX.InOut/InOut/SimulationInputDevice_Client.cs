@@ -63,9 +63,15 @@ namespace EQX.InOut
 
         public override bool Connect()
         {
-            client.Connect(new IPEndPoint(IPAddress.Loopback, 502 + Id));
+            try
+            {
+                client.Connect(new IPEndPoint(IPAddress.Loopback, 502 + Id));
 
-            IsConnected = client.IsConnected;
+                IsConnected = client.IsConnected;
+            }
+            catch
+            {
+            }
             return IsConnected;
         }
 

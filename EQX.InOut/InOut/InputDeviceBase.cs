@@ -63,6 +63,8 @@ namespace EQX.InOut
 
         private bool GetInput(int index)
         {
+            if (IsConnected == false) return false;
+
             bool newValue = ActualGetInput(index);
             return newValue;
         }
