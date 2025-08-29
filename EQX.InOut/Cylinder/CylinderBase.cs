@@ -20,7 +20,19 @@ namespace EQX.InOut
                 if (InForward != null & InBackward != null)
                 {
                     // Both input not null
-                    return InForward!.Value & !InBackward!.Value;
+                    bool isForward = true;
+                    bool isBackward = true;
+
+                    foreach (var input in InForward!)
+                    {
+                        isForward &= input.Value;
+                    }
+                    foreach (var input in InBackward!)
+                    {
+                        isBackward &= input.Value;
+                    }
+
+                    return isForward & !isBackward;
                 }
                 else if (InForward == null & InBackward == null)
                 {
@@ -30,12 +42,23 @@ namespace EQX.InOut
                 else if (InBackward != null)
                 {
                     // Only backward is not null
-                    return !InBackward!.Value;
+                    bool isBackward = true;
+
+                    foreach (var input in InBackward)
+                    {
+                        isBackward &= input.Value;
+                    }
+                    return !isBackward;
                 }
                 else
                 {
                     // Only forward is not null
-                    return InForward!.Value;
+                    bool isForward = true;
+                    foreach (var input in InForward!)
+                    {
+                        isForward &= input.Value;
+                    }
+                    return isForward;
                 }
             }
         }
@@ -47,7 +70,19 @@ namespace EQX.InOut
                 if (InForward != null & InBackward != null)
                 {
                     // Both input not null
-                    return !InForward!.Value & InBackward!.Value;
+                    bool isForward = true;
+                    bool isBackward = true;
+
+                    foreach (var input in InForward!)
+                    {
+                        isForward &= input.Value;
+                    }
+                    foreach (var input in InBackward!)
+                    {
+                        isBackward &= input.Value;
+                    }
+
+                    return !isForward & isBackward;
                 }
                 else if (InForward == null & InBackward == null)
                 {
@@ -57,27 +92,50 @@ namespace EQX.InOut
                 else if (InBackward != null)
                 {
                     // Only backward is not null
-                    return InBackward!.Value;
+                    bool isBackward = true;
+
+                    foreach (var input in InBackward)
+                    {
+                        isBackward &= input.Value;
+                    }
+                    return isBackward;
                 }
                 else
                 {
                     // Only forward is not null
-                    return !InForward!.Value;
+                    bool isForward = true;
+                    foreach (var input in InForward!)
+                    {
+                        isForward &= input.Value;
+                    }
+                    return !isForward;
                 }
             }
         }
         #endregion
 
         #region Constructors
-        public CylinderBase(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
+        public CylinderBase(List<IDInput>? inForwards, List<IDInput>? inBackwards, IDOutput? outForward, IDOutput? outBackward)
         {
-            InForward = inForward;
-            InBackward = inBackward;
+            InForward = inForwards;
+            InBackward = inBackwards;
             OutForward = outForward;
             OutBackward = outBackward;
 
-            if (InForward != null) InForward.ValueUpdated += InForward_ValueUpdated;
-            if (InBackward != null) InBackward.ValueUpdated += InForward_ValueUpdated;
+            if (InForward != null)
+            {
+                foreach (var input in InForward)
+                {
+                    input.ValueUpdated += InForward_ValueUpdated;
+                }
+            }
+            if (InBackward != null)
+            {
+                foreach (var input in InBackward)
+                {
+                    input.ValueUpdated += InForward_ValueUpdated;
+                }
+            }
         }
 
         private void InForward_ValueUpdated(object? sender, EventArgs e)
@@ -107,8 +165,8 @@ namespace EQX.InOut
         #region Protected
         protected IDOutput? OutForward { get; }
         protected IDOutput? OutBackward { get; }
-        protected IDInput? InForward { get; }
-        protected IDInput? InBackward { get; }
+        protected List<IDInput>? InForward { get; }
+        protected List<IDInput>? InBackward { get; }
         #endregion
 
         public override string ToString() => Name;
