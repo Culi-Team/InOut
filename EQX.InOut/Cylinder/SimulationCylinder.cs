@@ -80,9 +80,12 @@ namespace EQX.InOut
         #endregion
 
         #region Private methods
-        private void SetSimInput(IDInput? input, bool value)
+        private void SetSimInput(List<IDInput> input, bool value)
         {
-            SimulationInputSetter.SetSimInput(input, value);
+            foreach (var inp in input)
+            {
+                SimulationInputSetter.SetSimInput(inp, value);
+            }
         }
         #endregion
 
