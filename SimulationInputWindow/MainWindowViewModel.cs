@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using EQX.InOut;
+using FluentModbus;
 using SimulationInputWindow.Controls;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +25,13 @@ namespace SimulationInputWindow
         Tray2CST,
         CST2CST
     }
+
     public partial class MainWindowViewModel : ObservableObject
     {
         private System.Timers.Timer timerUpdateValue;
         public ObservableCollection<SetInputViewModel> InputList { get; set; }
         MemoryMappedFile _memoryMapFile;
+        private SimulationInputDeviceServer<EInputT2C> deviceServer; 
 
         public MainWindowViewModel()
         {
@@ -44,6 +49,16 @@ namespace SimulationInputWindow
             {
                 _memoryMapFile = MemoryMappedFile.CreateOrOpen("SimInputData", 256);
                 UpdateValue();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            try
+            {
+                deviceServer = new SimulationInputDeviceServer<EInputT2C>();
+                deviceServer.Start();
+                
             }
             catch (Exception ex)
             {
@@ -77,7 +92,7 @@ namespace SimulationInputWindow
                 });
             }
         }
-        
+
         public ICommand SetInputToStart
         {
             get
@@ -132,17 +147,19 @@ namespace SimulationInputWindow
         }
         private void UpdateValue()
         {
-            byte[] values;
+            //byte[] values;
 
-            using (MemoryMappedViewStream stream = _memoryMapFile.CreateViewStream())
+            //using (MemoryMappedViewStream stream = _memoryMapFile.CreateViewStream())
+            //{
+            //    BinaryReader reader = new BinaryReader(stream);
+            //    values = reader.ReadBytes(256);
+            //}
+            if(deviceServer != null)
             {
-                BinaryReader reader = new BinaryReader(stream);
-                values = reader.ReadBytes(256);
-            }
-
-            for (int i = 0; i < InputList.Count; i++)
-            {
-                InputList.First(input => input.Id == i).Value = values[i] == 1;
+                for (int i = 0; i < InputList.Count; i++)
+                {
+                    InputList.First(input => input.Id == i).Value = deviceServer[i];
+                }
             }
         }
 
@@ -150,18 +167,26 @@ namespace SimulationInputWindow
         {
             int index = (sender as SetInputViewModel).Id;
 
-            using (MemoryMappedViewStream stream = _memoryMapFile.CreateViewStream(index, 0))
-            {
-                BinaryWriter writer = new BinaryWriter(stream);
-                if ((sender as SetInputViewModel).Value)
-                {
-                    writer.Write((char)1);
-                }
-                else
-                {
-                    writer.Write((char)0);
+            //using (MemoryMappedViewStream stream = _memoryMapFile.CreateViewStream(index, 0))
+            //{
+            //    BinaryWriter writer = new BinaryWriter(stream);
+            //    if ((sender as SetInputViewModel).Value)
+            //    {
+            //        writer.Write((char)1);
+            //    }
+            //    else
+            //    {
+            //        writer.Write((char)0);
 
-                }
+            //    }
+            //}
+            if ((sender as SetInputViewModel).Value)
+            {
+                deviceServer[index] = true;
+            }
+            else
+            {
+                deviceServer[index] = false;
             }
         }
 
