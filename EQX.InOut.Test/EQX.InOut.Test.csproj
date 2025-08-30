@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+
     <PackageReference Include="FluentModbus" Version="5.3.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -23,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <ProjectReference Include="..\..\EQX.Core\EQX.Core\EQX.Core.csproj" />
     <ProjectReference Include="..\EQX.InOut\EQX.InOut.csproj" />
   </ItemGroup>
