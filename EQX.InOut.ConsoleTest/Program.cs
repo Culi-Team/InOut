@@ -1,13 +1,9 @@
-﻿using EQX.InOut;
-using FluentModbus;
-using log4net.Repository.Hierarchy;
-using Microsoft.Extensions.Logging;
-
-class Program
+﻿class Program
 {
-    void Main(string[] args)
+    // Dạng cơ bản
+    static void Main()
     {
-
-        
+        Console.WriteLine("Hello World");
     }
 }
+

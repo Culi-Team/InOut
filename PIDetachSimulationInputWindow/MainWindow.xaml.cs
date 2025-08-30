@@ -21,7 +21,17 @@ namespace PIDetachSimulationInputWindow
         {
             InitializeComponent();
             this.DataContext = new PIDetachSimulationInputWindow.MainWindowViewModel();
-            comboMachineType.ItemsSource = new List<EMachineType> { EMachineType.Tray2CST, EMachineType.CST2CST };
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button button) return;
+
+            if(this.DataContext is MainWindowViewModel vm)
+            {
+                EInput input = (EInput)Enum.Parse(typeof(EInput), button.Content.ToString());
+                vm.InputServer.ToggleInput((int)input);
+            }
         }
     }
 }
