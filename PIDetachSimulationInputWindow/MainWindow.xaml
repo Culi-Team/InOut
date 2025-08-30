@@ -10,6 +10,7 @@
         Title="PIDetachSimulationInputMainWindow">
     <Window.Resources>
         <cvt:InputOutputListConverter x:Key="InputOutputListConverter" />
+        <cvt:BooleanToFillOnOffConverter x:Key="BooleanToFillOnOffConverter"/>
     </Window.Resources>
     
     <Grid>
