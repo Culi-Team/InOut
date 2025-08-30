@@ -5,7 +5,9 @@
         public SimulationOutputDevice()
             : base()
         {
-            _outputs = new bool[256];
+            var outputList = Enum.GetNames(typeof(TEnum)).ToList();
+
+            _outputs = new bool[outputList.Count];
         }
 
         protected override bool GetOutput(int index)

@@ -84,7 +84,7 @@ namespace EQX.InOut
         {
             foreach (var inp in input)
             {
-                SimulationInputSetter.SetSimInput(inp, value);
+                SimulationInputSetter.SetSimModbusInput(inp, value);
             }
         }
         #endregion
