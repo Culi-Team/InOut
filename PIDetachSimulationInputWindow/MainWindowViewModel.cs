@@ -79,5 +79,29 @@ namespace PIDetachSimulationInputWindow
                 input.RaiseValueUpdated();
             }
         }
+
+        public ICommand SetInputDoorCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_1_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_1_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_2_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_2_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_3_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_3_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_4_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_4_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_5_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_5_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_6_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_6_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_7_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LOCK_7_R, true);
+                });
+            }
+        }
     }
 }

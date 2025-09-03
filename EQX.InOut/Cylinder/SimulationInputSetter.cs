@@ -29,11 +29,18 @@ namespace EQX.InOut
             if (input == null) return;
             try
             {
-                client.Connect();
-                client.WriteSingleCoil(0,input.Id, value);
+                using(ModbusTcpClient modbusTcpClient = new ModbusTcpClient())
+                {
+                    if (!modbusTcpClient.IsConnected)
+                    {
+                        modbusTcpClient.Connect();
+                    }
+                    modbusTcpClient.WriteSingleCoil(0, input.Id, value);
+                }
             }
-            catch
+            catch(Exception ex)
             {
+                
             }
         }
         static public readonly ModbusTcpClient client = new ModbusTcpClient();
