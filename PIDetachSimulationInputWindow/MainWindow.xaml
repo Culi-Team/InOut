@@ -22,6 +22,10 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="Set Input Door"
                     Command="{Binding SetInputDoorCommand}"/>
+
+            <Button Content="Set Input Origin"
+                    Command="{Binding SetInputOrigin}" />
+
         </StackPanel>
         <GroupBox Header="Input"
                   Grid.Row="1">

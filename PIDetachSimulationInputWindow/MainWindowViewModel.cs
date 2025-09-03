@@ -103,5 +103,20 @@ namespace PIDetachSimulationInputWindow
                 });
             }
         }
+
+        public ICommand SetInputOrigin
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_1_1_UNCLAMP, true);
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_1_2_UNCLAMP, true);
+
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_1_UNCLAMP, true);
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_2_UNCLAMP, true);
+                });
+            }
+        }
     }
 }
