@@ -100,6 +100,12 @@ namespace PIDetachSimulationInputWindow
                     InputServer.SetValue((int)EInput.DOOR_LOCK_6_R, true);
                     InputServer.SetValue((int)EInput.DOOR_LOCK_7_L, true);
                     InputServer.SetValue((int)EInput.DOOR_LOCK_7_R, true);
+
+                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_1_CLAMP, true);
+                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_2_CLAMP, true);
+
+                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_ALIGN_1_BW, true);
+                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_ALIGN_2_BW, true);
                 });
             }
         }
@@ -118,6 +124,25 @@ namespace PIDetachSimulationInputWindow
 
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_1_UNCLAMP, true);
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_2_UNCLAMP, true);
+                });
+            }
+        }
+
+        public ICommand SetInputRun
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_3, true);
+                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_4, true);
+
+                    InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_3, true);
+
                 });
             }
         }

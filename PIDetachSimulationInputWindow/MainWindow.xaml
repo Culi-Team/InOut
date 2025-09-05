@@ -25,7 +25,9 @@
 
             <Button Content="Set Input Origin"
                     Command="{Binding SetInputOrigin}" />
-
+            
+            <Button Content="Set Input Run"
+                    Command="{Binding SetInputRun}" />
         </StackPanel>
         <GroupBox Header="Input"
                   Grid.Row="1">
