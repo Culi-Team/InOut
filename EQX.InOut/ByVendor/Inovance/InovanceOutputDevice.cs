@@ -20,14 +20,14 @@ namespace EQX.InOut.ByVendor.Inovance
         protected override bool GetOutput(int index)
         {
             short sValue = 0;
-            ImcApi.IMC_GetEcatDoBit(MotionController.CardHandle, (short)index, ref sValue);
+            ImcApi.IMC_GetEcatDoBit(MotionController.DeviceId, (short)index, ref sValue);
 
             return sValue == 1;
         }
 
         protected override bool SetOutput(int index, bool value)
         {
-            return ImcApi.IMC_SetEcatDoBit(MotionController.CardHandle, (short)index, (short)(value ? 1 : 0)) == ImcApi.EXE_SUCCESS;
+            return ImcApi.IMC_SetEcatDoBit(MotionController.DeviceId, (short)index, (short)(value ? 1 : 0)) == ImcApi.EXE_SUCCESS;
         }
     }
 }

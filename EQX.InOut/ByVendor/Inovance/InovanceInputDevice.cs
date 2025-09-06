@@ -24,7 +24,7 @@ namespace EQX.InOut.ByVendor.Inovance
             if (MotionController is null) return false;
 
             short sValue = 0;
-            ImcApi.IMC_GetEcatDiBit(MotionController.CardHandle, (short)index, ref sValue);
+            ImcApi.IMC_GetEcatDiBit(MotionController.DeviceId, (short)index, ref sValue);
 
             return sValue == 1;
         }

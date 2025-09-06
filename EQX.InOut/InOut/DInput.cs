@@ -36,10 +36,6 @@ namespace EQX.InOut
             }
         }
 
-        public void Mapping(IDOutput dOutput)
-        {
-        }
-
         private bool _oldValue;
         private bool _currentValue;
         private readonly IDInputDevice _dInputDevice;

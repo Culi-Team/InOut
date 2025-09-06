@@ -4,7 +4,7 @@ using NativeLib = FASTECH.EziMOTIONPlusELib;
 
 namespace EQX.InOut
 {
-    public class PlusEOutputDevice<TEnum> : OutputDeviceBase<TEnum>
+    public class PlusEOutputDevice<TEnum> : OutputDeviceBase<TEnum> where TEnum : Enum
     {
         public PlusEOutputDevice()
             : base()

@@ -1,6 +1,6 @@
 ﻿namespace EQX.InOut
 {
-    public class SimulationOutputDevice<TEnum> : OutputDeviceBase<TEnum>
+    public class SimulationOutputDevice<TEnum> : OutputDeviceBase<TEnum> where TEnum : Enum
     {
         public SimulationOutputDevice()
             : base()

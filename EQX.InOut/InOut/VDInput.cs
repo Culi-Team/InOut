@@ -35,16 +35,6 @@ namespace EQX.InOut.InOut
             _dInputDevice = dInputDevice;
         }
 
-        public void Mapping(IDOutput dOutput)
-        {
-            if (this.dOutput != null)
-            {
-                throw new InvalidOperationException("Value input is mapped");
-            }
-
-            this.dOutput = dOutput;
-        }
-
         public void RaiseValueUpdated()
         {
             OnPropertyChanged(nameof(Value));

@@ -1,9 +1,11 @@
 ﻿using EQX.Core.InOut;
 using EQX.InOut;
+using EQX.InOut.InOut;
+using EQX.InOut.Virtual;
 
 namespace EQX.InOut
 {
-    public class OutputDeviceBase<TEnum> : IDOutputDevice
+    public class OutputDeviceBase<TEnum> : IDOutputDevice where TEnum : Enum
     {
         #region Properties
         public List<IDOutput> Outputs { get; private set; }
@@ -37,7 +39,14 @@ namespace EQX.InOut
             for (int i = 0; i < MaxPin; i++)
             {
                 if (i >= outputList.Count) break;
-                Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
+                if (this.GetType() == typeof(VirtualOutputDevice<TEnum>))
+                {
+                    Outputs.Add(new VDOutput(outputIndex[i], outputList[i], this));
+                }
+                else
+                {
+                    Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
+                }
             }
 
             return true;

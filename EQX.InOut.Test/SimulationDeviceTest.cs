@@ -3,20 +3,44 @@ using System.Net.NetworkInformation;
 
 namespace EQX.InOut.Test
 {
+    public enum DigitalPin
+    {
+        Pin1 = 0,
+        Pin2 = 1,
+        Pin3 = 2,
+        Pin4 = 3,
+        Pin5 = 4,
+        Pin6 = 5,
+        Pin7 = 6,
+        Pin8 = 7,
+        Pin9 = 8,
+        Pin10 = 9,
+        Pin11 = 10,
+        Pin12 = 11,
+        Pin13 = 12,
+        Pin14 = 13,
+        Pin15 = 14,
+        Pin16 = 15,
+        Pin17 = 16,
+        Pin18 = 17,
+        Pin19 = 18,
+        Pin20 = 19,
+        Pin21 = 20,
+        Pin22 = 21,
+        Pin23 = 22,
+        Pin24 = 23,
+        Pin25 = 24,
+        Pin26 = 25,
+        Pin27 = 26,
+        Pin28 = 27,
+        Pin29 = 28,
+        Pin30 = 29,
+        Pin31 = 30,
+        Pin32 = 31,
+    }
+
     public class SimulationDeviceTest
     {
-        enum DigitalPin
-        {
-            Pin1 = 0,
-            Pin2 = 1,
-            Pin3 = 2,
-            Pin4 = 3,
-            Pin5 = 4,
-            Pin6 = 5,
-            Pin7 = 6,
-            Pin8 = 7
-        }
-
         //[Fact]
         //public void ConnectionTest()
         //{

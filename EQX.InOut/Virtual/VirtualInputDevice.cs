@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EQX.Core.InOut;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,20 @@ namespace EQX.InOut.Virtual
     {
         public VirtualInputDevice() : base()
         {
-            
+            IsConnected = true;
         }
+
+        public void Mapping(int inputPin, IDOutputDevice outputDevice, int outputPin)
+        {
+            _mappings.Add(inputPin, (outputDevice, outputPin));
+        }
+
+        private Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
 
         protected override bool ActualGetInput(int index)
         {
-            return Inputs[index].Value;
+            return _mappings.ContainsKey(index) && _mappings[index].outputDevice[_mappings[index].outputPin];
+            //return Inputs[index].Value;
         }
     }
 }

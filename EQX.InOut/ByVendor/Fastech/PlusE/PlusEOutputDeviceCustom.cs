@@ -2,7 +2,7 @@
 
 namespace EQX.InOut
 {
-    public class PlusEOutputDeviceCustom<TEnum> : OutputDeviceBase<TEnum>
+    public class PlusEOutputDeviceCustom<TEnum> : OutputDeviceBase<TEnum> where TEnum : Enum
     {
         public PlusEOutputDeviceCustom()
             : base()
