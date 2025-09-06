@@ -1,4 +1,4 @@
-﻿using EQX.Motion.ByVendor.Inovance;
+﻿using EQX.Core.Motion;
 using Inovance.InoMotionCotrollerShop.InoServiceContract.EtherCATConfigApi;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace EQX.InOut.ByVendor.Inovance
 {
     public class InovanceOutputDevice<TEnum> : OutputDeviceBase<TEnum> where TEnum : Enum
     {
-        public MotionControllerInovance MotionController { get; init; }
+        public IMotionController MotionController { get; init; }
         public override bool IsConnected { get => MotionController.IsConnected; }
 
         public InovanceOutputDevice()

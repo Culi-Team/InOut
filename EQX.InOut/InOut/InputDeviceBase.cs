@@ -40,15 +40,8 @@ namespace EQX.InOut
             for (int i = 0; i < MaxPin; i++)
             {
                 if (i >= inputList.Count) break;
-                if(this.GetType() == typeof(VirtualInputDevice<TEnum>))
-                {
-                    Inputs.Add(new VDInput(inputIndex[i], inputList[i], this));
 
-                }
-                else
-                {
-                    Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
-                }
+                Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
             }
 
             return true;
