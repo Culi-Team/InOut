@@ -1,4 +1,6 @@
 ﻿using EQX.Core.InOut;
+using EQX.InOut.InOut;
+using EQX.InOut.Virtual;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace EQX.InOut
@@ -18,7 +20,7 @@ namespace EQX.InOut
 
         public bool this[int index] => GetInput(index % MaxPin);
 
-        public int MaxPin { get; init; }
+        public int MaxPin { get; init; } = 32;
         #endregion
 
         #region Constructor(s)
@@ -38,8 +40,15 @@ namespace EQX.InOut
             for (int i = 0; i < MaxPin; i++)
             {
                 if (i >= inputList.Count) break;
+                if(this.GetType() == typeof(VirtualInputDevice<TEnum>))
+                {
+                    Inputs.Add(new VDInput(inputIndex[i], inputList[i], this));
 
-                Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
+                }
+                else
+                {
+                    Inputs.Add(new DInput(inputIndex[i], inputList[i], this));
+                }
             }
 
             return true;

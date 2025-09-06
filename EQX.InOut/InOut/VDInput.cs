@@ -1,25 +1,48 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EQX.Core.InOut;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
-namespace EQX.InOut
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+namespace EQX.InOut.InOut
 {
-    public class DInput : ObservableObject, IDInput
+    public class VDInput : ObservableObject, IDInput
     {
         public event EventHandler? ValueUpdated;
         public event EventHandler? ValueChanged;
         public int Id { get; init; }
         public string Name { get; init; }
-        public bool Value => _dInputDevice[Id];
+        public bool Value
+        {
+            get
+            {
+                if (dOutput == null)
+                {
+                    throw new InvalidOperationException("Value input is not mapped");
+                }
 
-        public DInput(int id, string name, IDInputDevice dInputDevice)
+                return dOutput.Value;
+            }
+        }
+
+        public VDInput(int id, string name, IDInputDevice dInputDevice)
         {
             Id = id;
             Name = name;
 
             _dInputDevice = dInputDevice;
+        }
+
+        public void Mapping(IDOutput dOutput)
+        {
+            if (this.dOutput != null)
+            {
+                throw new InvalidOperationException("Value input is mapped");
+            }
+
+            this.dOutput = dOutput;
         }
 
         public void RaiseValueUpdated()
@@ -36,12 +59,10 @@ namespace EQX.InOut
             }
         }
 
-        public void Mapping(IDOutput dOutput)
-        {
-        }
-
         private bool _oldValue;
         private bool _currentValue;
         private readonly IDInputDevice _dInputDevice;
+
+        private IDOutput dOutput;
     }
 }
