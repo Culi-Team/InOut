@@ -19,7 +19,7 @@ namespace EQX.InOut
             set => SetOutput(index % MaxPin, value);
         }
 
-        public int MaxPin { get; init; }
+        public int MaxPin { get; init; } = 32;
         #endregion
 
         #region Constructor(s)
