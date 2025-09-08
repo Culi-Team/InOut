@@ -56,5 +56,56 @@ namespace EQX.InOut.Test
             Assert.False(dInputDevice[12]);
             Assert.False(dOutputDevice[22]);
         }
+
+        enum VTCamWork2CVFlag
+        {
+            InputReady,
+            OutputReady,
+        }
+
+        enum VTCamOutCVFlag
+        {
+            // INPUT FLAG
+            /// <summary>
+            /// Unloader has completed unloading the FRONT
+            /// </summary>
+            OutputDone,
+
+            // OUTPUT FLAG
+            InputReady,
+            OutputReady,
+        }
+
+        enum UnloaderFlag
+        {
+            // INPUT FLAG
+            OutputReady,
+
+            // OUTPUT FLAG
+            OutputDone,
+        }
+
+        [Fact]
+        public void VirtualFlagTest()
+        {
+            IDInputDevice outCVFlag_In = new VirtualInputDevice<VTCamOutCVFlag>() { Id = 1, Name = "OutCVFlag_In", MaxPin = 256 };
+            IDOutputDevice outCVFlag_Out = new VirtualOutputDevice<VTCamOutCVFlag>() { Id = 2, Name = "OutCVFlag_Out", MaxPin = 256 };
+            IDInputDevice unloaderFlag_In = new VirtualInputDevice<UnloaderFlag>() { Id = 3, Name = "UnloaderFlag_In", MaxPin = 256 };
+            IDOutputDevice unloaderFlag_Out = new VirtualOutputDevice<UnloaderFlag>() { Id = 4, Name = "UnloaderFlag_Out", MaxPin = 256 };
+
+            outCVFlag_In.Initialize();
+            outCVFlag_Out.Initialize();
+            outCVFlag_In.Initialize();
+
+            ((VirtualInputDevice<UnloaderFlag>)unloaderFlag_In).Mapping((int)UnloaderFlag.OutputReady, outCVFlag_Out, (int)VTCamOutCVFlag.OutputReady);
+
+            Assert.False(unloaderFlag_In[(int)UnloaderFlag.OutputReady]);
+
+            outCVFlag_Out[(int)VTCamOutCVFlag.OutputReady] = true;
+
+            Assert.True(outCVFlag_Out[(int)VTCamOutCVFlag.OutputReady]);
+            Assert.True(unloaderFlag_In[(int)UnloaderFlag.OutputReady]);
+
+        }
     }
 }
