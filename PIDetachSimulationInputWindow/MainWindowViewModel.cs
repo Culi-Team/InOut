@@ -116,8 +116,8 @@ namespace PIDetachSimulationInputWindow
             {
                 return new RelayCommand(() =>
                 {
-                    InputServer.SetValue((int)EInput.IN_CST_LIGHT_CURTAIN_SAFETY_DETECT, true);
-                    InputServer.SetValue((int)EInput.OUT_CST_LIGHT_CURTAIN_SAFETY_DETECT, true);
+                    InputServer.SetValue((int)EInput.IN_CST_LIGHT_CURTAIN_ALARM_DETECT, true);
+                    InputServer.SetValue((int)EInput.OUT_CST_LIGHT_CURTAIN_ALARM_DETECT, true);
 
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_1_1_UNCLAMP, true);
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_1_2_UNCLAMP, true);
