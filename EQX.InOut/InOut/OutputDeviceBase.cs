@@ -19,7 +19,7 @@ namespace EQX.InOut
             set => SetOutput(index % MaxPin, value);
         }
 
-        public int MaxPin { get; init; }
+        public int MaxPin { get; init; } = 32;
         #endregion
 
         #region Constructor(s)
@@ -39,14 +39,8 @@ namespace EQX.InOut
             for (int i = 0; i < MaxPin; i++)
             {
                 if (i >= outputList.Count) break;
-                if (this.GetType() == typeof(VirtualOutputDevice<TEnum>))
-                {
-                    Outputs.Add(new VDOutput(outputIndex[i], outputList[i], this));
-                }
-                else
-                {
-                    Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
-                }
+
+                Outputs.Add(new DOutput(outputIndex[i], outputList[i], this));
             }
 
             return true;

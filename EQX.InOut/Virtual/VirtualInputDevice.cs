@@ -24,7 +24,6 @@ namespace EQX.InOut.Virtual
         protected override bool ActualGetInput(int index)
         {
             return _mappings.ContainsKey(index) && _mappings[index].outputDevice[_mappings[index].outputPin];
-            //return Inputs[index].Value;
         }
     }
 }
