@@ -28,6 +28,8 @@
             
             <Button Content="Set Input Run"
                     Command="{Binding SetInputRun}" />
+            <Button Content="Off All Inputs"
+                    Command="{Binding OffAllInputsCommand}"/>
         </StackPanel>
         <GroupBox Header="Input"
                   Grid.Row="1">

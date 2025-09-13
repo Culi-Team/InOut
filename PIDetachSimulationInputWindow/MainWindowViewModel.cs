@@ -146,5 +146,20 @@ namespace PIDetachSimulationInputWindow
                 });
             }
         }
+
+        public ICommand OffAllInputsCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    var values = Enum.GetValues(typeof(EInput));
+                    foreach (var value in values)
+                    {
+                        InputServer.SetValue((int)value, false);
+                    }
+                });
+            }
+        }
     }
 }
