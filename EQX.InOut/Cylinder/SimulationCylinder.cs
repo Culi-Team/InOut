@@ -82,9 +82,12 @@ namespace EQX.InOut
         #region Private methods
         private void SetSimInput(List<IDInput> input, bool value)
         {
-            foreach (var inp in input)
+            if (input != null)
             {
-                SimulationInputSetter.SetSimModbusInput(inp, value);
+                foreach (var inp in input)
+                {
+                    SimulationInputSetter.SetSimModbusInput(inp, value);
+                }
             }
         }
         #endregion
