@@ -27,6 +27,15 @@ namespace EQX.InOut.Virtual
             return true;
         }
 
+        public void Clear()
+        {
+            var outputList = Enum.GetValues(typeof(TEnum));
+
+            foreach (var output in outputList)
+            {
+                _outputs[(int)output] = false;
+            }
+        }
         private readonly bool[] _outputs;
     }
 }
