@@ -143,6 +143,26 @@ namespace PIDetachSimulationInputWindow
                     InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_2, true);
                     InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_3, true);
 
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_FEEDING_ROLLER_DETECT, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_FEEDING_ROLLER_DETECT, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_FEEDING_ROLLER_DETECT, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_FEEDING_ROLLER_DETECT, true);
+
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_3, true);
+
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, true);
+
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_3, true);
+
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, true);
                 });
             }
         }
