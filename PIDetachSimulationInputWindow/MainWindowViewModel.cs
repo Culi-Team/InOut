@@ -101,6 +101,21 @@ namespace PIDetachSimulationInputWindow
                     InputServer.SetValue((int)EInput.DOOR_LOCK_7_L, true);
                     InputServer.SetValue((int)EInput.DOOR_LOCK_7_R, true);
 
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_1_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_1_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_2_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_2_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_3_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_3_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_4_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_4_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_5_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_5_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_6_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_6_R, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_7_L, true);
+                    InputServer.SetValue((int)EInput.DOOR_LATCH_7_R, true);
+
                     InputServer.SetValue((int)EInput.ROBOT_FIXTURE_1_CLAMP, true);
                     InputServer.SetValue((int)EInput.ROBOT_FIXTURE_2_CLAMP, true);
 
@@ -124,6 +139,16 @@ namespace PIDetachSimulationInputWindow
 
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_1_UNCLAMP, true);
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_2_UNCLAMP, true);
+
+                    InputServer.SetValue((int)EInput.MAIN_AIR_1, true);
+                    InputServer.SetValue((int)EInput.MAIN_AIR_2, true);
+                    InputServer.SetValue((int)EInput.MAIN_AIR_3, true);
+
+                    InputServer.SetValue((int)EInput.AUTO_MODE_SWITCH_L, true);
+                    InputServer.SetValue((int)EInput.AUTO_MODE_SWITCH_R, true);
+                    InputServer.SetValue((int)EInput.MANUAL_MODE_SWITCH_L, false);
+                    InputServer.SetValue((int)EInput.MANUAL_MODE_SWITCH_R, false);
+
                 });
             }
         }
@@ -134,11 +159,6 @@ namespace PIDetachSimulationInputWindow
             {
                 return new RelayCommand(() =>
                 {
-                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_3, true);
-                    InputServer.SetValue((int)EInput.IN_CST_WORK_DETECT_4, true);
-
                     InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_1, true);
                     InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_2, true);
                     InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_3, true);
