@@ -33,7 +33,7 @@ namespace EQX.InOut.InOut.Analog
             return true;
         }
 
-        public void Initialize()
+        public bool Initialize()
         {
             var inputList = Enum.GetNames(typeof(TEnum)).ToList();
             var inputIndex = (int[])Enum.GetValues(typeof(TEnum));
@@ -41,6 +41,8 @@ namespace EQX.InOut.InOut.Analog
             {
                 AnalogInputs.Add(new AInput(inputIndex[i], inputList[i], this));
             }
+
+            return true;
         }
 
         public virtual double GetVolt(int channel)
