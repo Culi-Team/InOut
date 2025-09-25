@@ -183,6 +183,10 @@ namespace PIDetachSimulationInputWindow
                     InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, true);
                     InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, true);
                     InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, true);
+
+                    InputServer.SetValue((int)EInput.IN_CST_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.IN_CST_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.SPARE_IN22, true);
                 });
             }
         }
