@@ -1,4 +1,5 @@
-﻿using EQX.Core.InOut;
+﻿using EQX.Core.Communication.Modbus;
+using EQX.Core.InOut;
 using FluentModbus;
 using System.IO.MemoryMappedFiles;
 
@@ -6,6 +7,8 @@ namespace EQX.InOut
 {
     public static class SimulationInputSetter
     {
+        static ModbusTcpCommunication ModbusTcpCommunication = new ModbusTcpCommunication();
+
         public static void SetSimInput(IDInput? input, bool value)
         {
             if (input == null) return;
@@ -24,26 +27,29 @@ namespace EQX.InOut
             }
         }
 
+        private static object lockObj = new object();
+
         public static void SetSimModbusInput(IDInput? input, bool value)
         {
             if (input == null) return;
             try
             {
-                using(ModbusTcpClient modbusTcpClient = new ModbusTcpClient())
+                lock (lockObj)
                 {
-                    if (!modbusTcpClient.IsConnected)
+                    if (!ModbusTcpCommunication.IsConnected)
                     {
-                        modbusTcpClient.Connect();
+                        ModbusTcpCommunication.Connect();
                     }
-                    modbusTcpClient.WriteSingleCoil(0, input.Id, value);
                 }
+
+                ModbusTcpCommunication.ModbusMaster.WriteSingleCoil(0, (ushort)input.Id, value);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
         }
-        static public readonly ModbusTcpClient client = new ModbusTcpClient();
+
         static MemoryMappedFile _mmf/* = MemoryMappedFile.OpenExisting("SimInputData")*/;
     }
 }
