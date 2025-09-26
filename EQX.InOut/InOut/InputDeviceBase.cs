@@ -67,8 +67,7 @@ namespace EQX.InOut
         {
             if (IsConnected == false) return false;
 
-            bool newValue = ActualGetInput(index);
-            return newValue;
+            return ActualGetInput(index);
         }
     }
 }
