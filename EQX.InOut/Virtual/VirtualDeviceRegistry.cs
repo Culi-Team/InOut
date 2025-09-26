@@ -60,7 +60,6 @@ namespace EQX.InOut.Virtual
                 return device;
             }
         }
-
         private static VirtualInputDevice<TEnum> CreateInputDevice<TEnum>(string key)
             where TEnum : Enum
         {
@@ -70,6 +69,7 @@ namespace EQX.InOut.Virtual
                 Name = key,
                 MaxPin = Enum.GetValues(typeof(TEnum)).Length
             };
+
 
             device.BindToSharedMemory(key);
             return device;
@@ -88,7 +88,6 @@ namespace EQX.InOut.Virtual
             device.BindToSharedMemory(key);
             return device;
         }
-
         private static readonly object _syncLock = new();
         private static readonly Dictionary<string, IDInputDevice> _inputDevices = new(StringComparer.Ordinal);
         private static readonly Dictionary<string, IDOutputDevice> _outputDevices = new(StringComparer.Ordinal);

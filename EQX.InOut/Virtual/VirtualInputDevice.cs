@@ -9,19 +9,15 @@ namespace EQX.InOut.Virtual
 {
     public class VirtualInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
-#if SIMULATION
         private readonly Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
         private readonly Dictionary<int, bool> _manualOverrides = new();
         private FlagInputMemoryBlock? _sharedMemory;
-#else
-        private Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
-#endif
+        //private Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
         public VirtualInputDevice() : base()
         {
             IsConnected = true;
         }
 
-#if SIMULATION
         internal void BindToSharedMemory(string key)
         {
             try
@@ -33,7 +29,6 @@ namespace EQX.InOut.Virtual
                 _sharedMemory = null;
             }
         }
-#endif
 
         public void Mapping(int inputPin, IDOutputDevice outputDevice, int outputPin)
         {
@@ -53,8 +48,9 @@ namespace EQX.InOut.Virtual
             {
                 publisher.RegisterSubscriber(outputPin, value => UpdateAutoValue(normalizedIndex, value));
             }
+#endif
         }
-
+#if SIMULATION
         public void SetManualInput(int index, bool value)
         {
             int normalizedIndex = Normalize(index);
@@ -110,8 +106,11 @@ namespace EQX.InOut.Virtual
             }
 
             return false;
+#endif
+
         }
 
+#if SIMULATION
         private void UpdateAutoValue(int index, bool value)
         {
             _sharedMemory?.SetAutoValue(index, value);
@@ -133,6 +132,7 @@ namespace EQX.InOut.Virtual
             return normalized;
         }
 #endif
+
     }
 }
 

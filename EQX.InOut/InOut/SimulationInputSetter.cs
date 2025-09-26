@@ -7,7 +7,7 @@ namespace EQX.InOut
 {
     public static class SimulationInputSetter
     {
-        static ModbusTcpCommunication ModbusTcpCommunication = new ModbusTcpCommunication();
+        //static ModbusTcpCommunication ModbusTcpCommunication = new ModbusTcpCommunication();
 
         public static void SetSimInput(IDInput? input, bool value)
         {
@@ -29,27 +29,27 @@ namespace EQX.InOut
 
         private static object lockObj = new object();
 
-        public static void SetSimModbusInput(IDInput? input, bool value)
-        {
-            if (input == null) return;
-            try
-            {
-                lock (lockObj)
-                {
-                    if (!ModbusTcpCommunication.IsConnected)
-                    {
-                        ModbusTcpCommunication.Connect();
-                    }
-                }
+        //public static void SetSimModbusInput(IDInput? input, bool value)
+        //{
+        //    if (input == null) return;
+        //    try
+        //    {
+        //        lock (lockObj)
+        //        {
+        //            if (!ModbusTcpCommunication.IsConnected)
+        //            {
+        //                ModbusTcpCommunication.Connect();
+        //            }
+        //        }
 
-                ModbusTcpCommunication.ModbusMaster.WriteSingleCoil(0, (ushort)input.Id, value);
-            }
-            catch (Exception ex)
-            {
+        //        ModbusTcpCommunication.ModbusMaster.WriteSingleCoil(0, (ushort)input.Id, value);
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
-        static MemoryMappedFile _mmf/* = MemoryMappedFile.OpenExisting("SimInputData")*/;
+        static MemoryMappedFile _mmf = MemoryMappedFile.OpenExisting("SimInputData");
     }
 }

@@ -5,18 +5,18 @@ using System.Net;
 
 namespace EQX.InOut
 {
-    public class SimulationInputDevice_Client<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
+    public class SimulationInputDevice_ClientMMF<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         //readonly ModbusTcpClient client;
         MemoryMappedFile? _memoryMapFile;
 
-        public SimulationInputDevice_Client()
+        public SimulationInputDevice_ClientMMF()
             : base()
         {
             //client = new ModbusTcpClient();
         }
 
-        ~SimulationInputDevice_Client()
+        ~SimulationInputDevice_ClientMMF()
         {
             //client.Dispose();
             _memoryMapFile.Dispose();

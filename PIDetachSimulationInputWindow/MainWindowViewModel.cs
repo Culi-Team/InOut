@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using EQX.Core.InOut;
 using EQX.InOut;
+using EQX.InOut.InOut;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,13 +25,21 @@ namespace PIDetachSimulationInputWindow
     {
         private Timer timerUpdateValue;
 
-        public SimulationInputDeviceServerModbus<EInput> InputServer { get; }
+        public SimulationInputDevice_ServerMMF<EInput> InputServer { get; }
+
         public MainWindowViewModel()
         {
-            InputServer = new SimulationInputDeviceServerModbus<EInput>() { Id = 1, Name = "Simulation", MaxPin = 500 };
+            InputServer = new SimulationInputDevice_ServerMMF<EInput>() { MaxPin = 1024 };
 
             InputServer.Initialize();
-            InputServer.Start();
+            try
+            {
+                UpdateValue();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             timerUpdateValue = new System.Timers.Timer();
             timerUpdateValue.Interval = 100;
