@@ -1,10 +1,4 @@
-﻿using EQX.Core;
-using EQX.Core.InOut;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EQX.Core.InOut;
 
 namespace EQX.InOut
 {

@@ -1,7 +1,4 @@
 ﻿using EQX.Core.InOut;
-using EQX.InOut;
-using EQX.InOut.InOut;
-using EQX.InOut.Virtual;
 
 namespace EQX.InOut
 {

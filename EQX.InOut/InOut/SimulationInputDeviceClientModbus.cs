@@ -1,11 +1,4 @@
 ﻿using FluentModbus;
-using System;
-using System.Collections.Generic;
-using System.IO.MemoryMappedFiles;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static log4net.Appender.FileAppender;
 
 namespace EQX.InOut.InOut
 {

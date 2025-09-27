@@ -1,9 +1,4 @@
 ﻿using EQX.InOut.InOut.Analog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EQX.InOut.ByVendor.Ajinextek
 {

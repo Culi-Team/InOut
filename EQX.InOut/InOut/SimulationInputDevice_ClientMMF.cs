@@ -1,7 +1,4 @@
-﻿using EQX.Core.Common;
-using FluentModbus;
-using System.IO.MemoryMappedFiles;
-using System.Net;
+﻿using System.IO.MemoryMappedFiles;
 
 namespace EQX.InOut
 {

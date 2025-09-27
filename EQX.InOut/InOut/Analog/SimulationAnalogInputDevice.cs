@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EQX.InOut.InOut.Analog
+﻿namespace EQX.InOut.InOut.Analog
 {
     public class SimulationAnalogInputDevice<TEnum> : AnalogInputDeviceBase<TEnum> where TEnum : Enum
     {

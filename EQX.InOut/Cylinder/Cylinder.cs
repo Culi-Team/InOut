@@ -1,5 +1,4 @@
 ﻿using EQX.Core.InOut;
-using EQX.Core.Sequence;
 
 namespace EQX.InOut
 {
