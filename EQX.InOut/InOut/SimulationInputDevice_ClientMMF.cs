@@ -4,30 +4,23 @@ namespace EQX.InOut
 {
     public class SimulationInputDevice_ClientMMF<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
-        //readonly ModbusTcpClient client;
         MemoryMappedFile? _memoryMapFile;
+		readonly object _sync = new();
 
         public SimulationInputDevice_ClientMMF()
             : base()
         {
-            //client = new ModbusTcpClient();
         }
 
-        ~SimulationInputDevice_ClientMMF()
-        {
-            //client.Dispose();
-            _memoryMapFile.Dispose();
-        }
-
-        public override bool Connect()
+		public override bool Connect()
         {
             try
             {
-                //client.Connect(new IPEndPoint(IPAddress.Loopback, 502 + Id));
-
-                //IsConnected = client.IsConnected;
-                _memoryMapFile = MemoryMappedFile.OpenExisting("SimInputData");
-                IsConnected = true;
+				lock (_sync)
+				{
+					_memoryMapFile = MemoryMappedFile.OpenExisting("SimInputData");
+					IsConnected = true;
+				}
             }
             catch
             {
@@ -36,27 +29,27 @@ namespace EQX.InOut
             return IsConnected;
         }
 
-        public override bool Disconnect()
+		public override bool Disconnect()
         {
-            //client.Disconnect();
-
-            //IsConnected = client.IsConnected;
-            //return !IsConnected;
-            _memoryMapFile?.Dispose();
-            _memoryMapFile = null;
-            IsConnected = false;
+			lock (_sync)
+			{
+				IsConnected = false;
+				_memoryMapFile?.Dispose();
+				_memoryMapFile = null;
+			}
             return true;
         }
 
-        protected override bool ActualGetInput(int index)
+		protected override bool ActualGetInput(int index)
         {
-            //var response = client.ReadCoils(0, 0, MaxPin);
-            if (_memoryMapFile == null) return false;
+			lock (_sync)
+			{
+				if (_memoryMapFile == null) return false;
 
-            //return (response[index / 8] & (0x01 << (index % 8))) != 0;
-            using var stream = _memoryMapFile.CreateViewStream(index, 1);
-            int value = stream.ReadByte();
-            return value == 1;
+				using var stream = _memoryMapFile.CreateViewStream(index, 1);
+				int value = stream.ReadByte();
+				return value == 1;
+			}
         }
     }
 }
