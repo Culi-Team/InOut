@@ -70,6 +70,8 @@ namespace PIFilmFlagSimulationWindow
             AddGroup(CreateGroup("Unload Transfer - Left", _simulationService.UnloadTransferLeftInput, _simulationService.UnloadTransferLeftOutput));
             AddGroup(CreateGroup("Unload Transfer - Right", _simulationService.UnloadTransferRightInput, _simulationService.UnloadTransferRightOutput));
             AddGroup(CreateGroup("Unload Align", _simulationService.UnloadAlignInput, _simulationService.UnloadAlignOutput));
+
+            AddGroup(CreateGroup("Robot Unload", _simulationService.RobotUnloadInput, _simulationService.RobotUnloadOutput));
         }
 
         private void AddGroup(FlagGroupViewModel group)

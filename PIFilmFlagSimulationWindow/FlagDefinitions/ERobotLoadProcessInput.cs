@@ -19,6 +19,7 @@ namespace PIFilmFlagSimulationWindow.FlagDefinitions
         VINYL_CLEAN_RECEIVE_UNLOAD_DONE,
 
         FIXTURE_ALIGN_REQ_LOAD,
+        FIXTURE_ALIGN_LOAD_DONE_RECEIVED,
         REMOVE_FILM_REQ_UNLOAD
     }
 }

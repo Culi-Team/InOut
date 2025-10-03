@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace PIFilmFlagSimulationWindow.FlagDefinitions
 {
-    public enum EFixtureAlignProcessOutput
+    public enum ERobotUnloadProcessOutput
     {
-        FIXTURE_ALIGN_REQ_LOAD,
-        FIXTURE_ALIGN_LOAD_DONE_RECEIVED,
-
-        FIXTURE_ALIGN_DONE,
-
-        TRANSFER_FIXTURE_DONE_RECEIVED,
+        ROBOT_UNLOAD_PICK_DONE
     }
 }

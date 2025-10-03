@@ -86,6 +86,9 @@ namespace PIFilmFlagSimulationWindow
             UnloadAlignInput = VirtualDeviceRegistry.GetOrAddInputDevice<EUnloadAlignProcessInput>("UnloadAlignInput");
             UnloadAlignOutput = VirtualDeviceRegistry.GetOrAddOutputDevice<EUnloadAlignProcessOutput>("UnloadAlignOutput");
 
+            RobotUnloadInput = VirtualDeviceRegistry.GetOrAddInputDevice<ERobotUnloadProcessInput>("RobotUnloadInput");
+            RobotUnloadOutput = VirtualDeviceRegistry.GetOrAddOutputDevice<ERobotUnloadProcessOutput>("RobotUnloadOutput");
+
             InitializeDevices();
             SetupMappings();
         }
@@ -165,6 +168,9 @@ namespace PIFilmFlagSimulationWindow
 
             EnsureInitialized(UnloadAlignInput);
             EnsureInitialized(UnloadAlignOutput);
+
+            EnsureInitialized(RobotUnloadInput);
+            EnsureInitialized(RobotUnloadOutput);
         }
 
         private static void EnsureInitialized<TEnum>(VirtualInputDevice<TEnum> device) where TEnum : Enum
@@ -232,6 +238,8 @@ namespace PIFilmFlagSimulationWindow
                 InWorkConveyorOutput, (int)EWorkConveyorProcessOutput.IN_CST_PICK_PLACE_DONE_RECEIVED);
             RobotLoadInput.Mapping((int)ERobotLoadProcessInput.OUT_CST_PLACE_DONE_RECEIVED,
                 OutWorkConveyorOutput, (int)EWorkConveyorProcessOutput.IN_CST_PICK_PLACE_DONE_RECEIVED);
+            RobotLoadInput.Mapping((int)ERobotLoadProcessInput.FIXTURE_ALIGN_LOAD_DONE_RECEIVED,
+                FixtureAlignOutput, (int)EFixtureAlignProcessOutput.FIXTURE_ALIGN_LOAD_DONE_RECEIVED);
 
             //Vinyl Clean Input Mapping
             VinylCleanInput.Mapping((int)EVinylCleanProcessInput.VINYL_CLEAN_LOAD_DONE,
@@ -400,6 +408,13 @@ namespace PIFilmFlagSimulationWindow
                 UnloadTransferLeftOutput, (int)EUnloadTransferProcessOutput.UNLOAD_TRANSFER_PLACE_DONE);
             UnloadAlignInput.Mapping((int)EUnloadAlignProcessInput.UNLOAD_TRANSFER_RIGHT_PLACE_DONE,
                 UnloadTransferRightOutput, (int)EUnloadTransferProcessOutput.UNLOAD_TRANSFER_PLACE_DONE);
+            UnloadAlignInput.Mapping((int)EUnloadAlignProcessInput.ROBOT_UNLOAD_PICK_DONE,
+                RobotUnloadOutput, (int)ERobotUnloadProcessOutput.ROBOT_UNLOAD_PICK_DONE);
+
+            RobotUnloadInput.Mapping((int)ERobotUnloadProcessInput.UNLOAD_ALIGN_REQ_ROBOT_UNLOAD,
+                UnloadAlignOutput, (int)EUnloadAlignProcessOutput.UNLOAD_ALIGN_REQ_ROBOT_UNLOAD);
+            RobotUnloadInput.Mapping((int)ERobotUnloadProcessInput.UNLOAD_ALIGN_UNLOAD_DONE_RECEIVED,
+                RobotUnloadOutput, (int)ERobotUnloadProcessInput.UNLOAD_ALIGN_UNLOAD_DONE_RECEIVED);
         }
 
         #region Properties
@@ -476,8 +491,10 @@ namespace PIFilmFlagSimulationWindow
 
         public VirtualInputDevice<EUnloadAlignProcessInput> UnloadAlignInput { get; }
         public VirtualOutputDevice<EUnloadAlignProcessOutput> UnloadAlignOutput { get; }
+
+        public VirtualInputDevice<ERobotUnloadProcessInput> RobotUnloadInput { get; }
+        public VirtualOutputDevice<ERobotUnloadProcessOutput> RobotUnloadOutput { get; }
         #endregion
     }
-
 }
 
