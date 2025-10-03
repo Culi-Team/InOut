@@ -4,7 +4,7 @@ namespace EQX.InOut
 {
     public class Cylinder : CylinderBase
     {
-        public Cylinder(List<IDInput>? inForward, List<IDInput>? inBackward, IDOutput? outForward, IDOutput? outBackward)
+        public Cylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
             : base(inForward, inBackward, outForward, outBackward)
         {
         }

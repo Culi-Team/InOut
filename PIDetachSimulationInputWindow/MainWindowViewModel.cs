@@ -48,6 +48,13 @@ namespace PIDetachSimulationInputWindow
                 UpdateValue();
             };
             timerUpdateValue.Start();
+
+            InputServer.SetValue((int)EInput.POWER_MC_ON_1, true);
+            InputServer.SetValue((int)EInput.POWER_MC_ON_2, true);
+
+            InputServer.SetValue((int)EInput.MAIN_AIR_1, true);
+            InputServer.SetValue((int)EInput.MAIN_AIR_2, true);
+            InputServer.SetValue((int)EInput.MAIN_AIR_3, true);
         }
 
         public uint SelectedInputDeviceIndex { get; set; }
@@ -131,6 +138,13 @@ namespace PIDetachSimulationInputWindow
 
                     InputServer.SetValue((int)EInput.ROBOT_FIXTURE_ALIGN_1_BW, true);
                     InputServer.SetValue((int)EInput.ROBOT_FIXTURE_ALIGN_2_BW, true);
+
+                    InputServer.SetValue((int)EInput.POWER_MC_ON_1, true);
+                    InputServer.SetValue((int)EInput.POWER_MC_ON_2, true);
+
+                    InputServer.SetValue((int)EInput.MAIN_AIR_1, true);
+                    InputServer.SetValue((int)EInput.MAIN_AIR_2, true);
+                    InputServer.SetValue((int)EInput.MAIN_AIR_3, true);
                 });
             }
         }
@@ -150,15 +164,10 @@ namespace PIDetachSimulationInputWindow
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_1_UNCLAMP, true);
                     InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_2_UNCLAMP, true);
 
-                    InputServer.SetValue((int)EInput.MAIN_AIR_1, true);
-                    InputServer.SetValue((int)EInput.MAIN_AIR_2, true);
-                    InputServer.SetValue((int)EInput.MAIN_AIR_3, true);
-
                     InputServer.SetValue((int)EInput.AUTO_MODE_SWITCH_L, true);
                     InputServer.SetValue((int)EInput.AUTO_MODE_SWITCH_R, true);
                     InputServer.SetValue((int)EInput.MANUAL_MODE_SWITCH_L, false);
                     InputServer.SetValue((int)EInput.MANUAL_MODE_SWITCH_R, false);
-
                 });
             }
         }

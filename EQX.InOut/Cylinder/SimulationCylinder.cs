@@ -5,7 +5,7 @@ namespace EQX.InOut
     public class SimulationCylinder : CylinderBase
     {
         #region Constructors
-        public SimulationCylinder(List<IDInput> inForward, List<IDInput> inBackward, IDOutput? outForward, IDOutput? outBackward)
+        public SimulationCylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
             : base(inForward, inBackward, outForward, outBackward)
         {
         }
@@ -88,6 +88,14 @@ namespace EQX.InOut
                 {
                     SimulationInputSetter.SetSimInput(inp, value);
                 }
+            }
+        }
+
+        private void SetSimInput(IDInput? input, bool value)
+        {
+            if (input != null)
+            {
+                SimulationInputSetter.SetSimInput(input, value);
             }
         }
         #endregion
