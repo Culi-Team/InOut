@@ -4,23 +4,20 @@ namespace EQX.InOut
 {
     public class SimulationInputDevice_ClientMMF<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
+        //readonly ModbusTcpClient client;
         MemoryMappedFile? _memoryMapFile;
-		readonly object _sync = new();
 
         public SimulationInputDevice_ClientMMF()
             : base()
         {
         }
 
-		public override bool Connect()
+        public override bool Connect()
         {
             try
             {
-				lock (_sync)
-				{
-					_memoryMapFile = MemoryMappedFile.OpenExisting("SimInputData");
-					IsConnected = true;
-				}
+                _memoryMapFile = MemoryMappedFile.OpenExisting("SimInputData");
+                IsConnected = true;
             }
             catch
             {
@@ -29,27 +26,20 @@ namespace EQX.InOut
             return IsConnected;
         }
 
-		public override bool Disconnect()
+        public override bool Disconnect()
         {
-			lock (_sync)
-			{
-				IsConnected = false;
-				_memoryMapFile?.Dispose();
-				_memoryMapFile = null;
-			}
+            _memoryMapFile = null;
+            IsConnected = false;
             return true;
         }
 
-		protected override bool ActualGetInput(int index)
+        protected override bool ActualGetInput(int index)
         {
-			lock (_sync)
-			{
-				if (_memoryMapFile == null) return false;
+            if (_memoryMapFile == null) return false;
 
-				using var stream = _memoryMapFile.CreateViewStream(index, 1);
-				int value = stream.ReadByte();
-				return value == 1;
-			}
+            using var stream = _memoryMapFile.CreateViewStream(index, 1);
+            int value = stream.ReadByte();
+            return value == 1;
         }
     }
 }
