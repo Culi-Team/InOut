@@ -1,0 +1,157 @@
+﻿namespace FrontCameraAssembleSimulationInput
+{
+    public enum EInput
+    {
+        #region BOARD 1
+        FRONT_START_SW = 0,
+        FRONT_STOP_SW = 1,
+        FRONT_RESET_SW = 2,
+        FRONT_POWER_ON = 3,
+        FRONT_EMERGENCY_STOP = 4,
+        REAR_STOP_SW = 5,
+        REAR_START_SW = 6,
+        REAR_EMERGENCY_STOP = 7,
+        FRONT_DOOR = 8,
+        RIGHT_DOOR = 9,
+        REAR_DOOR = 10,
+        LIGHT_CURTAIN_MUTING_SW = 11,
+        TRAY_IN_CV1_STOPPER_UP = 12,
+        TRAY_IN_CV1_STOPPER_DOWN = 13,
+        TRAY_IN_CV2_LEVEL = 14,
+        TRAY_OUT_CV2_LEVEL = 15,
+        #endregion
+
+        #region BOARD 2
+        TRAY_CENTERING1_ON = 16,
+        TRAY_CENTERING1_OFF = 17,
+        TRAY_CENTERING2_ON = 18,
+        TRAY_CENTERING2_OFF = 19,
+        TRAY_IN_CV1_DETECT_START = 20,
+        TRAY_IN_CV1_DETECT_END = 21,
+        TRAY_IN_CV1_DETECT_EXIST = 22,
+        TRAY_IN_CV2_DETECT_START = 23,
+        TRAY_IN_CV2_DETECT_END = 24,
+        TRAY_IN_CV2_DETECT_EXIST = 25,
+        TRAY_OUT_CV1_DETECT_START = 26,
+        TRAY_OUT_CV1_DETECT_END = 27,
+        TRAY_OUT_CV2_DETECT_START = 28,
+        TRAY_OUT_CV2_DETECT_END = 29,
+        TRAY_OUT_CV2_DETECT_EXIST = 30,
+        AREA_SENSOR_DETECT = 31,
+        #endregion
+
+        #region BOARD 3
+        TRAY_PICKER_UP = 32,
+        TRAY_PICKER_DOWN = 33,
+        TRAY_PICKER_VAC_ON = 34,
+        VTCAM_SUPPLY_PP_VAC_ON = 35,
+        SPARE_INPUT_36 = 36,
+        VTCAM_PREALIGN_VAC_ON = 37,
+        VTCAM_CENTERING_ON = 38,
+        VTCAM_CENTERING_OFF = 39,
+        SPONGE_PICKUP_FW = 40,
+        SPONGE_PICKUP_BW = 41,
+        SPONGE_PICKUP_UP = 42,
+        SPONGE_PICKUP_DW = 43,
+        SPONGE_HOLD_GRIP_ON = 44,
+        SPONGE_HOLD_GRIP_OFF = 45,
+        VTCAM_ASSEMBLE_PP_UP = 46,
+        VTCAM_ASSEMBLE_PP_DOWN = 47,
+        #endregion
+
+        #region BOARD 4
+        VTCAM_ROTATOR_FW = 48,
+        VTCAM_ROTATOR_BW = 49,
+        VTCAM_ROTATOR_UP = 50,
+        VTCAM_ROTATOR_DOWN = 51,
+        VTCAM_ROTATOR_GRIP = 52,
+        SPARE_INPUT_53 = 53,
+        VTCAM_ROTATOR_180 = 54,
+        VTCAM_ROTATOR_0 = 55,
+        FILM_DETACH_UP = 56,
+        FILM_DETACH_DOWN = 57,
+        FILM_DETACH_GRIP = 58,
+        FILM_DETACH_UNGRIP = 59,
+        FILM_DETACH_IONIZER_ON = 60,
+        FILM_DETACH_VAC_ON = 61,
+        VTCAM_ASSEMBLE_PP_VAC_ON = 62,
+        VTCAM_ASSEMBLE_PP_OVERLOAD = 63,
+        #endregion
+
+        #region BOARD 5
+        FRONT_LOAD_CV_START = 64,
+        FRONT_LOAD_CV_END = 65,
+        FRONT_DETACH_CV_START = 66,
+        FRONT_DETACH_CV_END = 67,
+        FRONT_ASSEMBLE_CV_START = 68,
+        FRONT_ASSEMBLE_CV_END = 69,
+        SPARE_INPUT_70 = 70,
+        SPARE_INPUT_71 = 71,
+        FRONT_DETACH_CV_STOPPER_UP = 72,
+        FRONT_DETACH_CV_STOPPER_DOWN = 73,
+        FRONT_DETACH_CV_CENTERING_NG = 74,
+        FRONT_DETACH_CV_CENTERING_OFF = 75,
+        FRONT_ASSEMBLE_CV_STOPPER_UP = 76,
+        FRONT_ASSEMBLE_CV_STOPPER_DOWN = 77,
+        FRONT_ASSEMBLE_CV_CENTERING_NG = 78,
+        FRONT_ASSEMBLE_CV_CENTERING_OFF = 79,
+        #endregion
+
+        #region BOARD 6
+        REAR_LOAD_CV_START = 80,
+        REAR_LOAD_CV_END = 81,
+        REAR_DETACH_CV_START = 82,
+        REAR_DETACH_CV_END = 83,
+        REAR_ASSEMBLE_CV_START = 84,
+        REAR_ASSEMBLE_CV_END = 85,
+        SPARE_INPUT_86 = 86,
+        SPARE_INPUT_87 = 87,
+        REAR_DETACH_CV_STOPPER_UP = 88,
+        REAR_DETACH_CV_STOPPER_DOWN = 89,
+        REAR_DETACH_CV_CENTERING_NG = 90,
+        REAR_DETACH_CV_CENTERING_OFF = 91,
+        REAR_ASSEMBLE_CV_STOPPER_UP = 92,
+        REAR_ASSEMBLE_CV_STOPPER_DOWN = 93,
+        REAR_ASSEMBLE_CV_CENTERING_NG = 94,
+        REAR_ASSEMBLE_CV_CENTERING_OFF = 95,
+        #endregion
+
+        #region BOARD 7
+        FRONT_UNLOAD_CV_START = 96,
+        FRONT_UNLOAD_CV_MID1 = 97,
+        FRONT_UNLOAD_CV_MID2 = 98,
+        FRONT_UNLOAD_CV_END = 99,
+        FRONT_UNLOAD_POS_UP = 100,
+        FRONT_UNLOAD_POS_DOWN = 101,
+        REAR_UNLOAD_CV_START = 102,
+        REAR_UNLOAD_CV_MID1 = 103,
+        REAR_UNLOAD_CV_MID2 = 104,
+        REAR_UNLOAD_CV_END = 105,
+        REAR_UNLOAD_POS_UP = 106,
+        REAR_UNLOAD_POS_DOWN = 107,
+        SPARE_INPUT_108 = 108,
+        SPARE_INPUT_109 = 109,
+        SPARE_INPUT_110 = 110,
+        SPARE_INPUT_111 = 111,
+        #endregion
+
+        #region BOARD 8
+        SPARE_INPUT_112 = 112,
+        SPARE_INPUT_113 = 113,
+        DOWNSTREAM_FRONT_LOAD_ENABLE = 114,
+        DOWNSTREAM_REAR_LOAD_ENABLE = 115,
+        SPARE_INPUT_116 = 116,
+        SPARE_INPUT_117 = 117,
+        SPARE_INPUT_118 = 118,
+        SPARE_INPUT_119 = 119,
+        SPARE_INPUT_120 = 120,
+        SPARE_INPUT_121 = 121,
+        SPARE_INPUT_122 = 122,
+        SPARE_INPUT_123 = 123,
+        SPARE_INPUT_124 = 124,
+        SPARE_INPUT_125 = 125,
+        SPARE_INPUT_126 = 126,
+        SPARE_INPUT_127 = 127
+        #endregion
+    }
+}
