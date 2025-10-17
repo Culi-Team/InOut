@@ -85,7 +85,12 @@ namespace FrontCameraAssembleSimulationInput
                     InputServer.SetValue((int)EInput.FRONT_DOOR, true);
                     InputServer.SetValue((int)EInput.REAR_DOOR, true);
                     InputServer.SetValue((int)EInput.RIGHT_DOOR, true);
-                    InputServer.SetValue((int)EInput.LIGHT_CURTAIN_MUTING_SW, false);
+
+                    InputServer.SetValue((int)EInput.FRONT_EMERGENCY_STOP, true);
+                    InputServer.SetValue((int)EInput.REAR_EMERGENCY_STOP, true);
+                    InputServer.SetValue((int)EInput.POWER_MC_ON, true);
+
+                    InputServer.SetValue((int)EInput.AREA_SENSOR_DETECT, true);
                 });
             }
         }
