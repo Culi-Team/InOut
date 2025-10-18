@@ -13,6 +13,39 @@ namespace EQX.InOut
 
         public ECylinderType CylinderType { get; set; }
 
+        private string? interlockKey;
+        public string? InterlockKey
+        {
+            get => interlockKey;
+            set => SetProperty(ref interlockKey, value);
+        }
+
+        private Func<bool>? interlockCondition;
+        public Func<bool>? InterlockCondition
+        {
+            get => interlockCondition;
+            set => SetProperty(ref interlockCondition, value);
+        }
+
+        private string? interlockFailMessage;
+        public string? InterlockFailMessage
+        {
+            get => interlockFailMessage;
+            set => SetProperty(ref interlockFailMessage, value);
+        }
+
+        public bool IsInterlockSatisfied()
+        {
+            return InterlockCondition?.Invoke() ?? true;
+        }
+
+        public event EventHandler? StateChanged;
+
+        protected virtual void OnStateChanged()
+        {
+            StateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         public bool IsForward
         {
             get
@@ -90,6 +123,7 @@ namespace EQX.InOut
         {
             OnPropertyChanged(nameof(IsForward));
             OnPropertyChanged(nameof(IsBackward));
+            OnStateChanged();
         }
         #endregion
 
@@ -98,12 +132,14 @@ namespace EQX.InOut
         {
             LogManager.GetLogger($"{Name}").Debug("Forward");
             ForwardAction();
+            OnStateChanged();
         }
 
         public void Backward()
         {
             LogManager.GetLogger($"{Name}").Debug("Backward");
             BackwardAction();
+            OnStateChanged();
         }
 
         protected virtual void ForwardAction() { }
