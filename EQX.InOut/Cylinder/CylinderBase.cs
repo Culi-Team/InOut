@@ -27,13 +27,6 @@ namespace EQX.InOut
             set => SetProperty(ref interlockCondition, value);
         }
 
-        private string? interlockFailMessage;
-        public string? InterlockFailMessage
-        {
-            get => interlockFailMessage;
-            set => SetProperty(ref interlockFailMessage, value);
-        }
-
         public bool IsInterlockSatisfied()
         {
             return InterlockCondition?.Invoke() ?? true;
