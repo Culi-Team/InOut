@@ -45,6 +45,16 @@ namespace EQX.InOut
             return true;
         }
 
+        public void InverseStatus(IList<IDInput> inputs)
+        {
+            foreach (var input in inputs)
+            {
+                InverseStatus(input);
+            }
+        }
+
+        public virtual void InverseStatus(IDInput input) { }
+
         public virtual bool Connect()
         {
             return true;
