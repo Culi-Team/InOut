@@ -6,23 +6,10 @@ namespace EQX.InOut.Virtual
     {
         private readonly Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
         private readonly Dictionary<int, bool> _manualOverrides = new();
-        private FlagInputMemoryBlock? _sharedMemory;
         //private Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
         public VirtualInputDevice() : base()
         {
             IsConnected = true;
-        }
-
-        internal void BindToSharedMemory(string key)
-        {
-            try
-            {
-                _sharedMemory = FlagSharedMemory.CreateInputBlock(key, MaxPin);
-            }
-            catch
-            {
-                _sharedMemory = null;
-            }
         }
 
         public void Mapping(int inputPin, IDOutputDevice outputDevice, int outputPin)
