@@ -48,6 +48,14 @@ namespace EQX.InOut
             return true;
         }
 
+        public virtual void ClearOutputs()
+        {
+            for (int i = 0; i < Outputs.Count; i++)
+            {
+                this[i] = false;
+            }
+        }
+
         public virtual bool Disconnect()
         {
             return true;
