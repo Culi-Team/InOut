@@ -1,8 +1,6 @@
 ﻿using EQX.Core.InOut;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace EQX.InOut
-#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     /// <summary>
     /// Passing the <typeparamref name="TEnum"/> enum as IO List for the Input Device
@@ -17,6 +15,7 @@ namespace EQX.InOut
         public virtual bool IsConnected { get; protected set; }
 
         public bool this[int index] => GetInput(index % MaxPin);
+        //public bool this[TEnum index] => GetInput(Convert.ToInt32(index) % MaxPin);
 
         public int MaxPin { get; init; } = 32;
         #endregion

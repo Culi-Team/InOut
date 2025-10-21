@@ -6,6 +6,7 @@ namespace EQX.InOut
     {
         #region Properties
         public List<IDOutput> Outputs { get; private set; }
+        private List<bool> _outputs;
         public int Id { get; init; }
         public string Name { get; init; }
         public virtual bool IsConnected { get; protected set; }
@@ -24,6 +25,7 @@ namespace EQX.InOut
         {
             Name ??= GetType().Name;
             Outputs = new List<IDOutput>();
+            _outputs = new List<bool>(new bool[MaxPin]);
         }
         #endregion
 
@@ -64,12 +66,13 @@ namespace EQX.InOut
 
         protected virtual bool GetOutput(int index)
         {
-            return true;
+            return _outputs[index];
         }
 
         protected virtual bool SetOutput(int index, bool value)
         {
-            return true;
+            _outputs[index] = value;
+            return _outputs[index] == value;
         }
     }
 }

@@ -2,12 +2,12 @@
 
 namespace EQX.InOut.Virtual
 {
-    public class VirtualInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
+    public class MappableInputDevice<TEnum> : InputDeviceBase<TEnum> where TEnum : Enum
     {
         private readonly Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
         private readonly Dictionary<int, bool> _manualOverrides = new();
         //private Dictionary<int, (IDOutputDevice outputDevice, int outputPin)> _mappings = new();
-        public VirtualInputDevice() : base()
+        public MappableInputDevice() : base()
         {
             IsConnected = true;
         }

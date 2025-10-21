@@ -11,7 +11,7 @@ namespace EQX.InOut.Test
     public class VirtualInOutTest
     {
         [Fact]
-        public void VirtualInOutMappingTest()
+        public void VirtualInOutDeviceMappingTest()
         {
             IDInputDevice dInputDevice = new VirtualInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
             IDOutputDevice dOutputDevice = new VirtualOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
@@ -55,6 +55,73 @@ namespace EQX.InOut.Test
 
             Assert.False(dInputDevice[12]);
             Assert.False(dOutputDevice[22]);
+        }
+
+        [Fact]
+        public void VirtualInOutSingleMappingTest()
+        {
+            IDInputDevice dInputDevice = new VirtualInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
+            IDOutputDevice dOutputDevice = new VirtualOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
+            IDInput input;
+            IDOutput output;
+            int pin;
+
+            dInputDevice.Initialize();
+            dOutputDevice.Initialize();
+
+            pin = 10;
+            input = dInputDevice.Inputs[pin];
+            output = dOutputDevice.Outputs[pin];
+
+            input.MapTo(output);
+
+            Assert.False(input.Value);
+            Assert.False(output.Value);
+            Assert.False(dInputDevice[pin]);
+            Assert.False(dOutputDevice[pin]);
+
+            output.Value = true;
+
+            Assert.True(input.Value);
+            Assert.True(output.Value);
+            Assert.True(dInputDevice[pin]);
+            Assert.True(dOutputDevice[pin]);
+
+            pin = 20;
+            input = dInputDevice.Inputs[pin];
+            output = dOutputDevice.Outputs[pin];
+
+            input.MapTo(output);
+
+            Assert.False(input.Value);
+            Assert.False(output.Value);
+            Assert.False(dInputDevice[pin]);
+            Assert.False(dOutputDevice[pin]);
+
+            output.Value = true;
+
+            Assert.True(input.Value);
+            Assert.True(output.Value);
+            Assert.True(dInputDevice[pin]);
+            Assert.True(dOutputDevice[pin]);
+
+            pin = 21;
+            input = dInputDevice.Inputs[pin];
+            output = dOutputDevice.Outputs[pin];
+
+            input.MapTo(output);
+
+            Assert.False(input.Value);
+            Assert.False(output.Value);
+            Assert.False(dInputDevice[pin]);
+            Assert.False(dOutputDevice[pin]);
+
+            output.Value = true;
+
+            Assert.True(input.Value);
+            Assert.True(output.Value);
+            Assert.True(dInputDevice[pin]);
+            Assert.True(dOutputDevice[pin]);
         }
 
         enum VTCamWork2CVFlag

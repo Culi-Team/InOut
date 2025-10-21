@@ -1,10 +1,40 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using EQX.Core.InOut;
+using EQX.InOut.Virtual;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace EQX.InOut
-#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
+    public static class FlagHelpers
+    {
+        public static void MapTo(this IDInput input, IDOutput output)
+        {
+            if (input is DInput dInput && output is DOutput dOutput)
+            {
+                var inDevice = dInput.GetInputDevice();
+                var outDevice = dOutput.GetOutputDevice();
+
+                if (outDevice.GetType().GetGenericTypeDefinition() != typeof(Virtual.MappableOutputDevice<>))
+                {
+                    throw new InvalidOperationException("Output device is not of type VirtualOutputDevice");
+                }
+
+                if (inDevice.GetType().IsGenericType &&
+                    inDevice.GetType().GetGenericTypeDefinition() == typeof(MappableInputDevice<>))
+                {
+                    dynamic device = inDevice;
+                    device.Mapping(input.Id, outDevice, dOutput.Id);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Input device is not of type VirtualInputDevice");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("Input/Output is not of type DInput/DOutput");
+            }
+        }
+    }
     public class DInput : ObservableObject, IDInput
     {
         public event EventHandler? ValueUpdated;
@@ -34,6 +64,8 @@ namespace EQX.InOut
                 ValueChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        internal IDInputDevice GetInputDevice() => _dInputDevice;
 
         private bool _oldValue;
         private bool _currentValue;
