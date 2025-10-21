@@ -13,15 +13,15 @@ namespace EQX.InOut.Test
         [Fact]
         public void VirtualInOutDeviceMappingTest()
         {
-            IDInputDevice dInputDevice = new VirtualInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
-            IDOutputDevice dOutputDevice = new VirtualOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
+            IDInputDevice dInputDevice = new MappableInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
+            IDOutputDevice dOutputDevice = new MappableOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
 
             dInputDevice.Initialize();
             dOutputDevice.Initialize();
 
-            ((VirtualInputDevice<DigitalPin>)dInputDevice).Mapping(10, dOutputDevice, 20);
-            ((VirtualInputDevice<DigitalPin>)dInputDevice).Mapping(11, dOutputDevice, 21);
-            ((VirtualInputDevice<DigitalPin>)dInputDevice).Mapping(12, dOutputDevice, 22);
+            ((MappableInputDevice<DigitalPin>)dInputDevice).Mapping(10, dOutputDevice, 20);
+            ((MappableInputDevice<DigitalPin>)dInputDevice).Mapping(11, dOutputDevice, 21);
+            ((MappableInputDevice<DigitalPin>)dInputDevice).Mapping(12, dOutputDevice, 22);
 
             Assert.False(dInputDevice[10]);
             Assert.False(dOutputDevice[20]);
@@ -60,8 +60,8 @@ namespace EQX.InOut.Test
         [Fact]
         public void VirtualInOutSingleMappingTest()
         {
-            IDInputDevice dInputDevice = new VirtualInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
-            IDOutputDevice dOutputDevice = new VirtualOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
+            IDInputDevice dInputDevice = new MappableInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
+            IDOutputDevice dOutputDevice = new MappableOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
             IDInput input;
             IDOutput output;
             int pin;
