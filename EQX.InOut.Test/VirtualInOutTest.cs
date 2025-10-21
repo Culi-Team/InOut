@@ -124,6 +124,29 @@ namespace EQX.InOut.Test
             Assert.True(dOutputDevice[pin]);
         }
 
+        [Fact]
+        public void VirtualInOutSingleMappingTest2()
+        {
+            IDInputDevice dInputDevice = new MappableInputDevice<DigitalPin>() { Id = 1, Name = "VIn1", MaxPin = 256 };
+            IDOutputDevice dOutputDevice = new MappableOutputDevice<DigitalPin>() { Id = 2, Name = "VOut1", MaxPin = 256 };
+
+            dInputDevice.Initialize();
+            dOutputDevice.Initialize();
+
+            IDOutput output = dOutputDevice.Outputs[(int)DigitalPin.Pin15];
+
+            dInputDevice[DigitalPin.Pin10]
+                .MapTo(dOutputDevice[DigitalPin.Pin15]);
+
+            Assert.False(dInputDevice[(int)DigitalPin.Pin10]);
+            Assert.False(dOutputDevice[(int)DigitalPin.Pin15]);
+
+            output.Value = true;
+
+            Assert.True(dInputDevice[(int)DigitalPin.Pin10]);
+            Assert.True(dOutputDevice[(int)DigitalPin.Pin15]);
+        }
+
         enum VTCamWork2CVFlag
         {
             InputReady,
@@ -155,16 +178,16 @@ namespace EQX.InOut.Test
         [Fact]
         public void VirtualFlagTest()
         {
-            IDInputDevice outCVFlag_In = new VirtualInputDevice<VTCamOutCVFlag>() { Id = 1, Name = "OutCVFlag_In", MaxPin = 256 };
-            IDOutputDevice outCVFlag_Out = new VirtualOutputDevice<VTCamOutCVFlag>() { Id = 2, Name = "OutCVFlag_Out", MaxPin = 256 };
-            IDInputDevice unloaderFlag_In = new VirtualInputDevice<UnloaderFlag>() { Id = 3, Name = "UnloaderFlag_In", MaxPin = 256 };
-            IDOutputDevice unloaderFlag_Out = new VirtualOutputDevice<UnloaderFlag>() { Id = 4, Name = "UnloaderFlag_Out", MaxPin = 256 };
+            IDInputDevice outCVFlag_In = new MappableInputDevice<VTCamOutCVFlag>() { Id = 1, Name = "OutCVFlag_In", MaxPin = 256 };
+            IDOutputDevice outCVFlag_Out = new MappableOutputDevice<VTCamOutCVFlag>() { Id = 2, Name = "OutCVFlag_Out", MaxPin = 256 };
+            IDInputDevice unloaderFlag_In = new MappableInputDevice<UnloaderFlag>() { Id = 3, Name = "UnloaderFlag_In", MaxPin = 256 };
+            IDOutputDevice unloaderFlag_Out = new MappableOutputDevice<UnloaderFlag>() { Id = 4, Name = "UnloaderFlag_Out", MaxPin = 256 };
 
             outCVFlag_In.Initialize();
             outCVFlag_Out.Initialize();
             outCVFlag_In.Initialize();
 
-            ((VirtualInputDevice<UnloaderFlag>)unloaderFlag_In).Mapping((int)UnloaderFlag.OutputReady, outCVFlag_Out, (int)VTCamOutCVFlag.OutputReady);
+            ((MappableInputDevice<UnloaderFlag>)unloaderFlag_In).Mapping((int)UnloaderFlag.OutputReady, outCVFlag_Out, (int)VTCamOutCVFlag.OutputReady);
 
             Assert.False(unloaderFlag_In[(int)UnloaderFlag.OutputReady]);
 

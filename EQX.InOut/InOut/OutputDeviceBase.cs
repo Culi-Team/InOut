@@ -1,4 +1,5 @@
 ﻿using EQX.Core.InOut;
+using EQX.InOut.InOut.Analog;
 
 namespace EQX.InOut
 {
@@ -15,6 +16,19 @@ namespace EQX.InOut
         {
             get => GetOutput(index % MaxPin);
             set => SetOutput(index % MaxPin, value);
+        }
+
+        public IDOutput this[Enum key]
+        {
+            get
+            {
+                if (typeof(TEnum) != key.GetType())
+                {
+                    throw new ArgumentException($"Key type must be of type {typeof(TEnum).Name}");
+                }
+
+                return Outputs.First(i => i.Id == Convert.ToInt32(key));
+            }
         }
 
         public int MaxPin { get; init; } = 32;

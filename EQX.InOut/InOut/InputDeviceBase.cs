@@ -15,7 +15,18 @@ namespace EQX.InOut
         public virtual bool IsConnected { get; protected set; }
 
         public bool this[int index] => GetInput(index % MaxPin);
-        //public bool this[TEnum index] => GetInput(Convert.ToInt32(index) % MaxPin);
+        public IDInput this[Enum key]
+        {
+            get
+            {
+                if (typeof(TEnum) != key.GetType())
+                {
+                    throw new ArgumentException($"Key type must be of type {typeof(TEnum).Name}");
+                }
+
+                return Inputs.First(i => i.Id == Convert.ToInt32(key));
+            }
+        }
 
         public int MaxPin { get; init; } = 32;
         #endregion
