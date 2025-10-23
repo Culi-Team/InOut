@@ -25,7 +25,14 @@ namespace EQX.InOut.ByVendor.Ajinextek
 
         public override double GetVolt(int channel)
         {
+            int moduleCount = 0;
+            AXA.AxaInfoGetModuleCount(ref moduleCount);
+
             double volt = 0.0;
+            uint digitValue = 0;
+
+            AXA.AxaiSwReadDigit((ushort)channel, ref digitValue);
+
             AXA.AxaiSwReadVoltage((ushort)channel, ref volt);
 
             return volt;
