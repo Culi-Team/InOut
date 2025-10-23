@@ -1,4 +1,5 @@
 using EQX.Core.InOut;
+using EQX.InOut.ByVendor.Ajinextek;
 using System.Net.NetworkInformation;
 
 namespace EQX.InOut.Test
@@ -37,6 +38,25 @@ namespace EQX.InOut.Test
         Pin30 = 29,
         Pin31 = 30,
         Pin32 = 31,
+    }
+
+    public class ADInputTest
+    {
+        [Fact]
+        public void ADInputValueTest()
+        {
+            IAInputDevice aDInputDevice = new AjinAnalogInputDevice<DigitalPin>();
+
+            aDInputDevice.Initialize();
+            aDInputDevice.Connect();
+
+            Assert.True(aDInputDevice.IsConnected);
+
+            double value = -1;
+            value = aDInputDevice.GetVolt(1);
+            value = aDInputDevice.GetVolt(2);
+
+        }
     }
 
     public class SimulationDeviceTest

@@ -12,7 +12,9 @@ namespace EQX.InOut.InOut.Analog
 
         public double Current => _aInputDevice.GetCurrent(Id);
 
-        public AInput(int id,string name ,IAInputDevice aInputDevice)
+        public IAInputParameter Parameter { get; }
+
+        public AInput(int id,string name, IAInputDevice aInputDevice)
         {
             Id = id;
             Name = name;

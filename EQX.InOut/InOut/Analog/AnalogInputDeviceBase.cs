@@ -37,7 +37,13 @@ namespace EQX.InOut.InOut.Analog
                 AnalogInputs.Add(new AInput(inputIndex[i], inputList[i], this));
             }
 
+            ExtendInit();
+
             return true;
+        }
+
+        protected virtual void ExtendInit()
+        {
         }
 
         public virtual double GetVolt(int channel)
