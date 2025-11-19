@@ -55,6 +55,16 @@ namespace PIDetachSimulationInputWindow
             InputServer.SetValue((int)EInput.MAIN_AIR_1, true);
             InputServer.SetValue((int)EInput.MAIN_AIR_2, true);
             InputServer.SetValue((int)EInput.MAIN_AIR_3, true);
+            InputServer.SetValue((int)EInput.MAIN_AIR_4, true);
+
+            InputServer.SetValue((int)EInput.ROBOT_LOAD_USER_SAF, true);
+            InputServer.SetValue((int)EInput.UNLOAD_ROB_USER_SAF, true);
+
+            InputServer.SetValue((int)EInput.ROBOT_LOAD_ALARM_STOP, true);
+            InputServer.SetValue((int)EInput.UNLOAD_ROB_ALARM_STOP, true);
+            InputServer.SetValue((int)EInput.SHUTTLE_L_AVOID_NOT_COLLISION, true);
+            InputServer.SetValue((int)EInput.SHUTTLE_R_AVOID_NOT_COLLISION, true);
+            InputServer.SetValue((int)EInput.UNLOAD_TRANSFER_AVOID_NOT_COLLISION, true);
         }
 
         public uint SelectedInputDeviceIndex { get; set; }
@@ -133,18 +143,13 @@ namespace PIDetachSimulationInputWindow
                     InputServer.SetValue((int)EInput.DOOR_LATCH_7_L, true);
                     InputServer.SetValue((int)EInput.DOOR_LATCH_7_R, true);
 
-                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_1_CLAMP, true);
-                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_2_CLAMP, true);
-
-                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_ALIGN_1_BW, true);
-                    InputServer.SetValue((int)EInput.ROBOT_FIXTURE_ALIGN_2_BW, true);
-
                     InputServer.SetValue((int)EInput.POWER_MC_ON_1, true);
                     InputServer.SetValue((int)EInput.POWER_MC_ON_2, true);
 
                     InputServer.SetValue((int)EInput.MAIN_AIR_1, true);
                     InputServer.SetValue((int)EInput.MAIN_AIR_2, true);
                     InputServer.SetValue((int)EInput.MAIN_AIR_3, true);
+                    InputServer.SetValue((int)EInput.MAIN_AIR_4, true);
                 });
             }
         }
@@ -155,19 +160,14 @@ namespace PIDetachSimulationInputWindow
             {
                 return new RelayCommand(() =>
                 {
-                    InputServer.SetValue((int)EInput.IN_CST_LIGHT_CURTAIN_ALARM_DETECT, true);
-                    InputServer.SetValue((int)EInput.OUT_CST_LIGHT_CURTAIN_ALARM_DETECT, true);
+                    InputServer.SetValue((int)EInput.ROBOT_LOAD_CYL_1_UNCLAMP, true);
+                    InputServer.SetValue((int)EInput.ROBOT_LOAD_CYL_2_UNCLAMP, true);
 
-                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_1_1_UNCLAMP, true);
-                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_1_2_UNCLAMP, true);
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_CYL_1_UNCLAMP, true);
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_CYL_2_UNCLAMP, true);
 
-                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_1_UNCLAMP, true);
-                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_2_2_UNCLAMP, true);
-
-                    InputServer.SetValue((int)EInput.AUTO_MODE_SWITCH_L, true);
-                    InputServer.SetValue((int)EInput.AUTO_MODE_SWITCH_R, true);
-                    InputServer.SetValue((int)EInput.MANUAL_MODE_SWITCH_L, false);
-                    InputServer.SetValue((int)EInput.MANUAL_MODE_SWITCH_R, false);
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_CYL_3_UNCLAMP, true);
+                    InputServer.SetValue((int)EInput.TRANSFER_FIXTURE_CYL_4_UNCLAMP, true);
                 });
             }
         }
@@ -178,34 +178,47 @@ namespace PIDetachSimulationInputWindow
             {
                 return new RelayCommand(() =>
                 {
-                    InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.OUT_CST_WORK_DETECT_3, true);
+                    InputServer.SetValue((int)EInput.OUT_WORK_CV_CST_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.OUT_WORK_CV_CST_DETECT_2, true);
+                    InputServer.SetValue((int)EInput.OUT_WORK_CV_CST_DETECT_3, true);
 
-                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_FEEDING_ROLLER_DETECT, true);
-                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_FEEDING_ROLLER_DETECT, true);
-                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_FEEDING_ROLLER_DETECT, true);
-                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_FEEDING_ROLLER_DETECT, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_FEEDING_ROLLER_DETECT, false);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_FEEDING_ROLLER_DETECT, false);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_FEEDING_ROLLER_DETECT, false);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_FEEDING_ROLLER_DETECT, false);
 
-                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_3, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_1, false);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_2, false);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_WIPER_CLEAN_DETECT_3, false);
 
-                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, false);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, false);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, false);
 
-                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_3, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_1, false);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_2, false);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_WIPER_CLEAN_DETECT_3, false);
 
-                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_1, false);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_2, false);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_WIPER_CLEAN_DETECT_3, false);
 
-                    InputServer.SetValue((int)EInput.IN_CST_DETECT_1, true);
-                    InputServer.SetValue((int)EInput.IN_CST_DETECT_2, true);
-                    InputServer.SetValue((int)EInput.SPARE_IN22, true);
+                    InputServer.SetValue((int)EInput.IN_CV_CST_DETECT_1, true);
+                    InputServer.SetValue((int)EInput.IN_CV_CST_DETECT_2, true);
+
+                    InputServer.SetValue((int)EInput.VINYL_CLEAN_FULL_DETECT, true);
+
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_ALCOHOL_LEAK_DETECT, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_LEFT_PUMP_LEAK_DETECT, true);
+
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_ALCOHOL_LEAK_DETECT, true);
+                    InputServer.SetValue((int)EInput.WET_CLEAN_RIGHT_PUMP_LEAK_DETECT, true);
+
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_ALCOHOL_LEAK_DETECT, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_LEFT_PUMP_LEAK_DETECT, true);
+
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_ALCOHOL_LEAK_DETECT, true);
+                    InputServer.SetValue((int)EInput.AF_CLEAN_RIGHT_PUMP_LEAK_DETECT, true);
                 });
             }
         }
