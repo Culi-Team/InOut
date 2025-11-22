@@ -94,12 +94,15 @@ namespace EQX.InOut
         #endregion
 
         #region Constructors
-        public CylinderBase(IDInput? inForwards, IDInput? inBackwards, IDOutput? outForward, IDOutput? outBackward)
+        public CylinderBase(IDInput? inForwards, IDInput? inBackwards, IDOutput? outForward, IDOutput? outBackward, Func<bool> forwardInterlock, Func<bool> backwardInterlock)
         {
             InForward = inForwards;
             InBackward = inBackwards;
             OutForward = outForward;
             OutBackward = outBackward;
+            ForwardInterlock = forwardInterlock;
+            BackwardInterlock = backwardInterlock;
+
 
             if (InForward != null)
             {
@@ -120,9 +123,14 @@ namespace EQX.InOut
         }
         #endregion
 
+
+        public Func<bool> ForwardInterlock;
+        public Func<bool> BackwardInterlock;
+
         #region Public methods
         public void Forward()
         {
+            if (ForwardInterlock != null && ForwardInterlock() == false) return;
             LogManager.GetLogger($"{Name}").Debug("Forward");
             ForwardAction();
             OnStateChanged();
@@ -130,6 +138,7 @@ namespace EQX.InOut
 
         public void Backward()
         {
+            if (BackwardInterlock != null && BackwardInterlock() == false) return;
             LogManager.GetLogger($"{Name}").Debug("Backward");
             BackwardAction();
             OnStateChanged();

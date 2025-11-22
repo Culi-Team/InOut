@@ -1,11 +1,12 @@
 ﻿using EQX.Core.InOut;
+using log4net.Util;
 
 namespace EQX.InOut
 {
     public class Cylinder : CylinderBase
     {
-        public Cylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
-            : base(inForward, inBackward, outForward, outBackward)
+        public Cylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward, Func<bool> forwardInterlock, Func<bool> backwardInterlock)
+            : base(inForward, inBackward, outForward, outBackward, forwardInterlock, backwardInterlock)
         {
         }
 
