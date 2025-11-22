@@ -30,9 +30,11 @@ namespace EQX.InOut
         #region Private methods
         protected override bool ActualGetInput(int index)
         {
-            _ = CAXD.AxdiReadInport(index, ref oldValue);
+            uint value = 0;
 
-            return oldValue == 1;
+            _ = CAXD.AxdiReadInport(index, ref value);
+
+            return value == 1;
         }
         #endregion
 
