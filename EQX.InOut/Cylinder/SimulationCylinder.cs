@@ -5,8 +5,8 @@ namespace EQX.InOut
     public class SimulationCylinder : CylinderBase
     {
         #region Constructors
-        public SimulationCylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward, Func<bool>? forwardInterlock, Func<bool>? backwardInterlock)
-            : base(inForward, inBackward, outForward, outBackward, forwardInterlock, backwardInterlock)
+        public SimulationCylinder(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
+            : base(inForward, inBackward, outForward, outBackward)
         {
         }
         #endregion

@@ -4,9 +4,9 @@ namespace EQX.InOut
 {
     public class CylinderFactory : ICylinderFactory
     {
-        public ICylinder Create(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward, Func<bool>? forwardInterlock, Func<bool>? backwardInterlock)
+        public ICylinder Create(IDInput? inForward, IDInput? inBackward, IDOutput? outForward, IDOutput? outBackward)
         {
-            return new Cylinder(inForward, inBackward, outForward, outBackward, forwardInterlock, backwardInterlock);
+            return new Cylinder(inForward, inBackward, outForward, outBackward);
         }
     }
 }
