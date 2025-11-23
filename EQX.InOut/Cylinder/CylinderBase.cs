@@ -39,6 +39,9 @@ namespace EQX.InOut
             StateChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public Func<bool>? ForwardInterlock { get; set; }
+        public Func<bool>? BackwardInterlock { get; set; }
+
         public bool IsForward
         {
             get
@@ -101,6 +104,7 @@ namespace EQX.InOut
             OutForward = outForward;
             OutBackward = outBackward;
 
+
             if (InForward != null)
             {
                 InForward.ValueUpdated += InForward_ValueUpdated;
@@ -123,6 +127,7 @@ namespace EQX.InOut
         #region Public methods
         public void Forward()
         {
+            if (ForwardInterlock != null && ForwardInterlock() == false) return;
             LogManager.GetLogger($"{Name}").Debug("Forward");
             ForwardAction();
             OnStateChanged();
@@ -130,6 +135,7 @@ namespace EQX.InOut
 
         public void Backward()
         {
+            if (BackwardInterlock != null && BackwardInterlock() == false) return;
             LogManager.GetLogger($"{Name}").Debug("Backward");
             BackwardAction();
             OnStateChanged();
@@ -144,8 +150,8 @@ namespace EQX.InOut
         protected IDOutput? OutBackward { get; }
         protected IDInput? InForward { get; }
         protected IDInput? InBackward { get; }
-        #endregion
 
         public override string ToString() => Name;
+        #endregion
     }
 }

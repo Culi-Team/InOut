@@ -1,4 +1,5 @@
 ﻿using EQX.Core.InOut;
+using log4net.Util;
 
 namespace EQX.InOut
 {
