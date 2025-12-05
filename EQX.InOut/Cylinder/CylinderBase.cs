@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using EQX.Core.InOut;
 using log4net;
 
@@ -24,13 +25,21 @@ namespace EQX.InOut
         public Func<bool>? InterlockCondition
         {
             get => interlockCondition;
-            set => SetProperty(ref interlockCondition, value);
+            set
+            {
+                if(SetProperty(ref interlockCondition, value)) 
+                { 
+                    OnPropertyChanged(nameof(IsInterlockSatisfiedState));
+                }
+            }
         }
 
         public bool IsInterlockSatisfied()
         {
             return InterlockCondition?.Invoke() ?? true;
         }
+
+        public bool IsInterlockSatisfiedState => IsInterlockSatisfied();
 
         public event EventHandler? StateChanged;
 
@@ -94,6 +103,80 @@ namespace EQX.InOut
                 }
             }
         }
+
+        public bool HasForwardSensor => InForward != null;
+
+        public bool HasBackwardSensor => InBackward != null;
+
+        private double waitTimeOutOccurredSeconds = 6;
+
+        public double WaitTimeOutOccurredSeconds
+        {
+            get => waitTimeOutOccurredSeconds;
+            set
+            {
+                if (SetProperty(ref waitTimeOutOccurredSeconds, value))
+                {
+                    if (!forwardTimeoutOverridden)
+                    {
+                        ForwardTimeoutSeconds = value;
+                    }
+
+                    if (!backwardTimeoutOverridden)
+                    {
+                        BackwardTimeoutSeconds = value;
+                    }
+                }
+            }
+        }
+
+        private double forwardTimeoutSeconds;
+
+        public double ForwardTimeoutSeconds
+        {
+            get => forwardTimeoutSeconds;
+            set
+            {
+                forwardTimeoutOverridden = true;
+                SetProperty(ref forwardTimeoutSeconds, value);
+            }
+        }
+
+        private double backwardTimeoutSeconds;
+
+        public double BackwardTimeoutSeconds
+        {
+            get => backwardTimeoutSeconds;
+            set
+            {
+                backwardTimeoutOverridden = true;
+                SetProperty(ref backwardTimeoutSeconds, value);
+            }
+        }
+
+        private bool isActuating;
+
+        public bool IsActuating
+        {
+            get => isActuating;
+            private set => SetProperty(ref isActuating, value);
+        }
+
+        private bool isForwarding;
+
+        public bool IsForwarding
+        {
+            get => isForwarding;
+            private set => SetProperty(ref isForwarding, value);
+        }
+
+        private bool isBackwarding;
+
+        public bool IsBackwarding
+        {
+            get => isBackwarding;
+            private set => SetProperty(ref isBackwarding, value);
+        }
         #endregion
 
         #region Constructors
@@ -103,6 +186,9 @@ namespace EQX.InOut
             InBackward = inBackwards;
             OutForward = outForward;
             OutBackward = outBackward;
+
+            forwardTimeoutSeconds = waitTimeOutOccurredSeconds;
+            backwardTimeoutSeconds = waitTimeOutOccurredSeconds;
 
 
             if (InForward != null)
@@ -120,6 +206,7 @@ namespace EQX.InOut
         {
             OnPropertyChanged(nameof(IsForward));
             OnPropertyChanged(nameof(IsBackward));
+            OnPropertyChanged(nameof(IsInterlockSatisfiedState));
             OnStateChanged();
         }
         #endregion
@@ -141,6 +228,76 @@ namespace EQX.InOut
             OnStateChanged();
         }
 
+        public async Task<bool> MoveForwardWithTimeoutAsync(TimeSpan? timeout = null, CancellationToken cancellationToken = default)
+        {
+            if (!await operationLock.WaitAsync(0, cancellationToken))
+            {
+                return false;
+            }
+
+            try
+            {
+                SetOperationState(isForwarding: true, isBackwarding: false);
+                Forward();
+                var actualTimeout = timeout ?? TimeSpan.FromSeconds(ForwardTimeoutSeconds);
+                return await WaitForSensorAsync(
+                    () => IsForward,
+                    HasForwardSensor,
+                    actualTimeout,
+                    "forward",
+                    elapsed => ForwardElapsedSeconds = elapsed.TotalSeconds,
+                    cancellationToken);
+            }
+            finally
+            {
+                ResetOperationState();
+                operationLock.Release();
+            }
+        }
+
+        public async Task<bool> MoveBackwardWithTimeoutAsync(TimeSpan? timeout = null, CancellationToken cancellationToken = default)
+        {
+            if (!await operationLock.WaitAsync(0, cancellationToken))
+            {
+                return false;
+            }
+
+            try
+            {
+                SetOperationState(isForwarding: false, isBackwarding: true);
+                Backward();
+                var actualTimeout = timeout ?? TimeSpan.FromSeconds(BackwardTimeoutSeconds);
+                return await WaitForSensorAsync(
+                    () => IsBackward,
+                    HasBackwardSensor,
+                    actualTimeout,
+                    "backward",
+                    elapsed => BackwardElapsedSeconds = elapsed.TotalSeconds,
+                    cancellationToken);
+            }
+            finally
+            {
+                ResetOperationState();
+                operationLock.Release();
+            }
+        }
+
+        private double forwardElapsedSeconds;
+
+        public double ForwardElapsedSeconds
+        {
+            get => forwardElapsedSeconds;
+            private set => SetProperty(ref forwardElapsedSeconds, value);
+        }
+
+        private double backwardElapsedSeconds;
+
+        public double BackwardElapsedSeconds
+        {
+            get => backwardElapsedSeconds;
+            private set => SetProperty(ref backwardElapsedSeconds, value);
+        }
+
         protected virtual void ForwardAction() { }
         protected virtual void BackwardAction() { }
         #endregion
@@ -151,6 +308,54 @@ namespace EQX.InOut
         protected IDInput? InForward { get; }
         protected IDInput? InBackward { get; }
 
+        private readonly SemaphoreSlim operationLock = new(1, 1);
+        private bool forwardTimeoutOverridden;
+        private bool backwardTimeoutOverridden;
+
+        private void SetOperationState(bool isForwarding, bool isBackwarding)
+        {
+            IsActuating = true;
+            IsForwarding = isForwarding;
+            IsBackwarding = isBackwarding;
+        }
+
+        private void ResetOperationState()
+        {
+            IsActuating = false;
+            IsForwarding = false;
+            IsBackwarding = false;
+        }
+
+        private async Task<bool> WaitForSensorAsync(
+            Func<bool> completed,
+            bool hasSensor,
+            TimeSpan timeout,
+            string direction,
+            Action<TimeSpan>? onSuccess,
+            CancellationToken cancellationToken)
+        {
+            if (!hasSensor)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(200), cancellationToken);
+                return true;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+            while (stopwatch.Elapsed < timeout)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (completed())
+                {
+                    onSuccess?.Invoke(stopwatch.Elapsed);
+                    return true;
+                }
+
+                await Task.Delay(TimeSpan.FromMilliseconds(50), cancellationToken);
+            }
+
+            LogManager.GetLogger($"{Name}").Error($"{Name} {direction} timeout after {timeout.TotalSeconds:0.##}s");
+            return false;
+        }
         public override string ToString() => Name;
         #endregion
     }
