@@ -228,7 +228,7 @@ namespace EQX.InOut
             OnStateChanged();
         }
 
-        public async Task<bool> MoveForwardWithTimeoutAsync(TimeSpan? timeout = null, CancellationToken cancellationToken = default)
+        public async Task<bool> MoveForwardWithTimeoutAsync(TimeSpan? timeout = null, CancellationToken cancellationToken = default, bool trackElapsed = false)
         {
             if (!await operationLock.WaitAsync(0, cancellationToken))
             {
@@ -238,7 +238,7 @@ namespace EQX.InOut
             try
             {
                 SetOperationState(isForwarding: true, isBackwarding: false);
-                if (HasForwardSensor)
+                if (trackElapsed && HasForwardSensor)
                 {
                     ForwardElapsedSeconds = 0;
                 }
@@ -249,7 +249,7 @@ namespace EQX.InOut
                     HasForwardSensor,
                     actualTimeout,
                     "forward",
-                    elapsed => ForwardElapsedSeconds = elapsed.TotalSeconds,
+                    trackElapsed ? elapsed => ForwardElapsedSeconds = elapsed.TotalSeconds : null,
                     cancellationToken);
             }
             finally
@@ -259,7 +259,7 @@ namespace EQX.InOut
             }
         }
 
-        public async Task<bool> MoveBackwardWithTimeoutAsync(TimeSpan? timeout = null, CancellationToken cancellationToken = default)
+        public async Task<bool> MoveBackwardWithTimeoutAsync(TimeSpan? timeout = null, CancellationToken cancellationToken = default, bool trackElapsed = false)
         {
             if (!await operationLock.WaitAsync(0, cancellationToken))
             {
@@ -269,7 +269,7 @@ namespace EQX.InOut
             try
             {
                 SetOperationState(isForwarding: false, isBackwarding: true);
-                if (HasBackwardSensor)
+                if (trackElapsed && HasBackwardSensor)
                 {
                     BackwardElapsedSeconds = 0;
                 }
@@ -280,7 +280,7 @@ namespace EQX.InOut
                     HasBackwardSensor,
                     actualTimeout,
                     "backward",
-                    elapsed => BackwardElapsedSeconds = elapsed.TotalSeconds,
+                    trackElapsed ? elapsed => BackwardElapsedSeconds = elapsed.TotalSeconds : null,
                     cancellationToken);
             }
             finally
