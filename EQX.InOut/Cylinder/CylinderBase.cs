@@ -238,6 +238,10 @@ namespace EQX.InOut
             try
             {
                 SetOperationState(isForwarding: true, isBackwarding: false);
+                if (HasForwardSensor)
+                {
+                    ForwardElapsedSeconds = 0;
+                }
                 Forward();
                 var actualTimeout = timeout ?? TimeSpan.FromSeconds(ForwardTimeoutSeconds);
                 return await WaitForSensorAsync(
@@ -265,6 +269,10 @@ namespace EQX.InOut
             try
             {
                 SetOperationState(isForwarding: false, isBackwarding: true);
+                if (HasBackwardSensor)
+                {
+                    BackwardElapsedSeconds = 0;
+                }
                 Backward();
                 var actualTimeout = timeout ?? TimeSpan.FromSeconds(BackwardTimeoutSeconds);
                 return await WaitForSensorAsync(
@@ -331,11 +339,12 @@ namespace EQX.InOut
             bool hasSensor,
             TimeSpan timeout,
             string direction,
-            Action<TimeSpan>? onSuccess,
+            Action<TimeSpan>? onElapsedUpdate,
             CancellationToken cancellationToken)
         {
             if (!hasSensor)
             {
+                onElapsedUpdate?.Invoke(TimeSpan.Zero);
                 await Task.Delay(TimeSpan.FromMilliseconds(200), cancellationToken);
                 return true;
             }
@@ -344,9 +353,9 @@ namespace EQX.InOut
             while (stopwatch.Elapsed < timeout)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                onElapsedUpdate?.Invoke(stopwatch.Elapsed);
                 if (completed())
                 {
-                    onSuccess?.Invoke(stopwatch.Elapsed);
                     return true;
                 }
 
